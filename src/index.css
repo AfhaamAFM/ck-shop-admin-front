@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.login-Container{
+
+  display: flex;
+  margin: auto;
+margin-top: 6rem;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 35%;
+}
+@media (max-width: 500px) {
+  .login-Container {
+    min-width: 90%;
+  }
+}
+.input-container{
+  display: flex;
+  flex-direction: column;
+  
+}
+.button-container{
+  display: flex;
+  justify-content: center;
+}
+.login-header{
+display: flex;
+border-radius: 1rem;
+justify-content: center;
+color: white ;
+background-color: black;
+}
+.login-Container h4{
+  color: red;
+}
