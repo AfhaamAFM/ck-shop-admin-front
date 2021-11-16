@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 import Sibebar from '../adminRoutes/Sibebar'
-import Header from '../Header'
 import { fetchUser } from '../../REDUX/GET USER/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import UserTableRow from '../Tables/UserTableRow'
@@ -13,7 +12,7 @@ useEffect(()=>{
 
 dispatch(fetchUser())
 
-},[])
+},[dispatch])
     return (
         <>
          <Sibebar />

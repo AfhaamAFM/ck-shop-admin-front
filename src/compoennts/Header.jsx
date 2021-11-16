@@ -4,11 +4,11 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 function Header({value}) {
     const [active,setActive]=useState(false)
 
-    function toggleHandler(){
-        setActive(!active)
+    // function toggleHandler(){
+    //     setActive(!active)
         
         
-         }
+    //      }
         
 
     return (

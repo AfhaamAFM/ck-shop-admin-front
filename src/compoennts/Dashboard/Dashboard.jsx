@@ -1,9 +1,15 @@
-import React from "react";
-import { Container } from "react-bootstrap";
+import React, { useEffect } from "react";
 import Sibebar from "../adminRoutes/Sibebar";
-import Header from "../Header";
-
+import {useDispatch} from 'react-redux'
+import { fetchUser } from "../../REDUX/GET USER/userAction";
 function Dashboard() {
+const dispatch = useDispatch()
+
+  useEffect(()=>{
+
+    dispatch(fetchUser())
+    
+    },[])
   return (
     <>
       <Sibebar />

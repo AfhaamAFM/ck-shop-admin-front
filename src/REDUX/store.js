@@ -1,6 +1,5 @@
 import {createStore,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
-import adminReducer from './admin/adminReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './rootReducer'
 

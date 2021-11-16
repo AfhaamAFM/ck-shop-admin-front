@@ -1,4 +1,4 @@
-import { USER_FETCH_ERROR, USER_FETCH_REQUEST, USER_FETCH_SUCCESS, USER_FETCH_VERIFY } from "./userType"
+import { USER_FETCH_ERROR, USER_FETCH_REQUEST, USER_FETCH_SUCCESS } from "./userType"
 import axios from 'axios'
 
 
@@ -48,6 +48,17 @@ export const fetchUser = () => {
 
 
 
-
-
 }
+
+// export const userBlocker =()=>{
+
+
+//     return(dispatch)=>{
+    
+//         dispatch(fetchUserRequest())
+//     }
+
+//     axios.get('')
+    
+//     }
+    

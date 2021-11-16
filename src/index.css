@@ -481,7 +481,26 @@ nav .profile-details i{
 /* .table-Container{
  
 
-  display: flex;
-  justify-content: space-around ;
+
 } */
 /* User table ends */
+/* user table icons start*/
+
+.table-icons{
+  display: flex;
+  justify-content: space-around;
+cursor: pointer;
+}
+.table-icons 
+i:hover{
+  color: red;
+}
+.add-new{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  border: 1px solid rgb(163, 231, 222);
+  padding: 1rem;
+}
+
+/* user table icons end */

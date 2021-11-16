@@ -61,10 +61,10 @@ function Sibebar() {
             </a>
           </li>
           <li>
-            <a href="#">
+            <Link to='/category'>
               <i className="bx bx-coin-stack"></i>
-              <span className="links_name">Stock</span>
-            </a>
+              <span className="links_name">Category</span>
+            </Link>
           </li>
           <li>
             <a href="#">

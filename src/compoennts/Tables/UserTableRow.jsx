@@ -1,9 +1,10 @@
 import {Button} from 'react-bootstrap'
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import swal from 'sweetalert';
 import {useDispatch} from 'react-redux'
 import { fetchUser } from '../../REDUX/GET USER/userAction';
+import { fetchCategory } from '../../REDUX/category/categoryAction';
 
 
 
@@ -16,7 +17,6 @@ const dispatch =useDispatch()
 function blockHandler(event){
 
 
-console.log('ithaaaan id '+event.target.id);
 
 const id = event.target.id
 

@@ -1,36 +1,36 @@
-import { USER_FETCH_ERROR, USER_FETCH_REQUEST, USER_FETCH_SUCCESS} from "./userType"
+import { CATEGORY_FETCH_ERROR, CATEGORY_FETCH_REQUEST, CATEGORY_FETCH_SUCCESS} from './categoryType'
 
 
-const userinitialState = {
+const catinitialState = {
     loading: true,
-    users: [],
+    category: [],
     error: ''
 }
-const userReducer = (state = userinitialState, action) => {
+const categoryReducer = (state = catinitialState, action) => {
 
     switch (action.type) {
 
-        case USER_FETCH_REQUEST:
+        case CATEGORY_FETCH_REQUEST:
             return {
 
                 ...state,
                 loading: true
 
             }
-        case USER_FETCH_SUCCESS:
+        case CATEGORY_FETCH_SUCCESS:
             return {
 
                 ...state,
                 loading: false,
-                users: action.payload,
+                category: action.payload,
                 error: ''
 
             }
-        case USER_FETCH_ERROR:
+        case CATEGORY_FETCH_ERROR:
             return {
-                ...state,
+            ...state,
                 loading: false,
-                users: [],
+                category: [],
                 error: action.payload,
 
 
@@ -42,4 +42,4 @@ const userReducer = (state = userinitialState, action) => {
     }
 
 }
-export default userReducer
+export default categoryReducer

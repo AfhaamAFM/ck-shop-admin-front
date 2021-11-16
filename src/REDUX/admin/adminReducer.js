@@ -24,6 +24,7 @@ const adminReducer = (state = initialState, action) => {
 
         case ADMIN_FETCH_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 admin: action.payload,
                 error: ''
@@ -31,6 +32,7 @@ const adminReducer = (state = initialState, action) => {
             }
         case ADMIN_FETCH_ERROR:
             return {
+                ...state,
                 loading: false,
                 error: action.payload,
                 users: ''
