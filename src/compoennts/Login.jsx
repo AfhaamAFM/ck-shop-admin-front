@@ -33,13 +33,13 @@ const adminData={
 console.log(adminData);
 dispatch(fetchAdminRequest())
 axios.post('http://localhost:5000/admin/login',adminData).then(res=>{
-    console.log(res)
-
+   
+   
 if(res.data.response){
 
 setWarning(res.data.response)
 }else{
-
+console.log('okkk');
 navigate('/dashboard')
 dispatch(adminlogged())
 }

@@ -1,0 +1,12 @@
+
+    function previewFile(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setPreviewSource(reader.result)}}
+   
+function handleSubmitHandler(e){
+
+e.preventDefault();
+if(!previewSource) return;
+uploadImage(previewSource)}

@@ -502,5 +502,13 @@ i:hover{
   border: 1px solid rgb(163, 231, 222);
   padding: 1rem;
 }
-
+/* csub-category tablle */
+.own-home-section{
+margin: auto;
+align-content: space-around;
+}
 /* user table icons end */
+.image-viewer{
+  max-height: 50px;
+ max-width: 50px;
+}

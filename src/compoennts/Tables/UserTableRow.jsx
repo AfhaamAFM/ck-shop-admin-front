@@ -22,7 +22,6 @@ const id = event.target.id
 
 axios.get(`http://localhost:5000/admin//user-block/${id}`).then(res=>{
 
-
 if(res.data.status){
 
 
