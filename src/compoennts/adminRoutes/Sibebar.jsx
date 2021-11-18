@@ -43,59 +43,61 @@ function Sibebar() {
             </Link>
           </li>
           <li>
-            <a href="#">
-              <i className="bx bx-box"></i>
-              <span className="links_name">Product</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i className="bx bx-list-ul"></i>
-              <span className="links_name">Order list</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i className="bx bx-pie-chart-alt-2"></i>
-              <span className="links_name">Analytics</span>
-            </a>
-          </li>
-          <li>
             <Link to='/category'>
               <i className="bx bx-coin-stack"></i>
               <span className="links_name">Category</span>
             </Link>
           </li>
           <li>
+            <Link to='/product'>
+              <i className="bx bx-box"></i>
+              <span className="links_name">Products</span>
+            </Link>
+          </li>
+         
+          {/* <li>
+            <a href="#">
+              <i className="bx bx-list-ul"></i>
+              <span className="links_name">Order list</span>
+            </a>
+          </li> */}
+          {/* <li>
+            <a href="#">
+              <i className="bx bx-pie-chart-alt-2"></i>
+              <span className="links_name">Analytics</span>
+            </a>
+          </li> */}
+          
+          {/* <li>
             <a href="#">
               <i className="bx bx-book-alt"></i>
               <span className="links_name">Total order</span>
             </a>
-          </li>
+          </li> */}
           <li>
             <Link to="/userManage">
               <i className="bx bx-user"></i>
               <span className="links_name">User Managment</span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <a href="#">
               <i className="bx bx-message"></i>
               <span className="links_name">Messages</span>
             </a>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <a href="#">
               <i className="bx bx-heart"></i>
               <span className="links_name">Favrorites</span>
             </a>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <a href="#">
               <i className="bx bx-cog"></i>
               <span className="links_name">Setting</span>
             </a>
-          </li>
+          </li> */}
           <Button variant="danger" onClick={logoutHandler}>
             logout
           </Button>

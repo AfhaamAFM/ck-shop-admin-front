@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Container, Row, Table, Col, Button, Tab, Tabs } from 'react-bootstrap'
-function SubcategoryTable() {
+function Product() {
 
 
     const [previewSource, setPreviewSource] = useState()
@@ -29,7 +29,7 @@ selectedFile.forEach(file=>{
     formData.append("image", file);
 })
 
-formData.append("image", selectedFile);
+// formData.append("image", selectedFile);
 axios.post("http://localhost:5000/demo", formData).then(response=>{
     console.log(response);
 })
@@ -75,4 +75,4 @@ axios.post("http://localhost:5000/demo", formData).then(response=>{
     )
 }
 
-export default SubcategoryTable
+export default Product

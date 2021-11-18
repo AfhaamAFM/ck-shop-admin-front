@@ -512,3 +512,11 @@ align-content: space-around;
   max-height: 50px;
  max-width: 50px;
 }
+/* Add product form */
+.warning-text{
+  color:red
+}
+/* table form image */
+.table_image{
+  width: 30px;
+}

@@ -9,6 +9,7 @@ import { adminlogged } from '../../REDUX/admin/adminAction';
 import Dashboard from '../Dashboard/Dashboard';
 import UserManage from '../Dashboard/UserManage';
 import CategoryManage from '../Dashboard/Category/CategoryManage';
+import ProducScreen from '../product/ProducScreen';
 
 
 function Adminroutes() {
@@ -47,6 +48,7 @@ function Adminroutes() {
 
                             <Route path='/userManage' element={<UserManage />} />
                             <Route path='/category' element={<CategoryManage />} />
+                       <Route path='/product' element ={<ProducScreen/>}/>
                         </>
 
                     }
