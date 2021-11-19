@@ -520,3 +520,14 @@ align-content: space-around;
 .table_image{
   width: 30px;
 }
+.image_preview{
+  width: 100px;
+}
+/* subcategory table koothikettalll */
+
+.subTableRow{
+
+  display: flex;
+      justify-content: space-around;
+      padding: 5 px;
+}

@@ -8,7 +8,8 @@ import { fetchCategory } from '../../../REDUX/category/categoryAction'
 import CategoryTableRow from '../../Tables/CategoryTableRow'
 import axios from 'axios'
 import swal from 'sweetalert'
-import Subctegory from './Subctegory';
+import Subctegory from '../Category/Subctegory';
+
 
 
 function CategoryManage() {
@@ -53,12 +54,10 @@ function CategoryManage() {
         <Container>
 
         <Tabs
-  defaultActiveKey="home"
-  transition={false}
-  id="noanim-tab-example"
-  className="mb-3"
->
+  defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+
   <Tab eventKey="home" title="Home">
+    <h2>seee</h2>
   <Row className='align-items-center'>
             <h2>Category List</h2>
             <div className='table-Container' >
@@ -99,8 +98,8 @@ function CategoryManage() {
   <Tab eventKey="profile" title="sub category">
     <Subctegory/>
   </Tab>
-  <Tab eventKey="contact" title="Contact">
-    {/* <Sonnet /> */}
+  <Tab eventKey="contact" title="EDit">
+    <h2>hello</h2>
   </Tab>
 </Tabs>
       
