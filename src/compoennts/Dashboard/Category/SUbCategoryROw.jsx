@@ -30,7 +30,7 @@ const[count,setCount]=useState(0)
       .then((willDelete) => {
         if (willDelete) {
 
-          axios.post(`http://localhost:5000/admin//category/sub/delete`,{_id,subCat}).then(res => {
+          axios.post(`/admin//category/sub/delete`,{_id,subCat}).then(res => {
 
 
             if (res.data) {

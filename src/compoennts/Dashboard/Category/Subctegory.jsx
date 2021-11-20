@@ -31,7 +31,7 @@ const[subCat,setSubCat]=useState('')
     setLoading(false)
   }
   function addHandler() {
-    axios.post('http://localhost:5000/admin/category/sub/add', { _id,subCat }).then(res => {
+    axios.post('/admin/category/sub/add', { _id,subCat }).then(res => {
 
      
       if (res.data.response) {

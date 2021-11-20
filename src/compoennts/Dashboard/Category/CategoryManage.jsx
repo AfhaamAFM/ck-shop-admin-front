@@ -9,6 +9,7 @@ import CategoryTableRow from '../../Tables/CategoryTableRow'
 import axios from 'axios'
 import swal from 'sweetalert'
 import Subctegory from '../Category/Subctegory';
+import EditCtaegoryScreen from './EditCtaegoryScreen';
 
 
 
@@ -29,7 +30,7 @@ function CategoryManage() {
 
 
   function addHandler() {
-    axios.post('http://localhost:5000/admin/category/add', { categoryName }).then(res => {
+    axios.post('/admin/category/add', { categoryName }).then(res => {
 
       console.log(res.data.response);
       if (res.data.response) {
@@ -99,7 +100,7 @@ function CategoryManage() {
     <Subctegory/>
   </Tab>
   <Tab eventKey="contact" title="EDit">
-    <h2>hello</h2>
+   <EditCtaegoryScreen/>
   </Tab>
 </Tabs>
       

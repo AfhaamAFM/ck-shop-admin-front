@@ -37,7 +37,7 @@ export const adminVerify = (response) => {
 export const adminlogged=()=>{
     return (dispatch)=>{
          dispatch(fetchAdminRequest())
-        axios.get('http://localhost:5000/admin/loggedIn').then(res=>{
+        axios.get('/admin/loggedIn').then(res=>{
     
         
             dispatch(adminVerify(res.data))

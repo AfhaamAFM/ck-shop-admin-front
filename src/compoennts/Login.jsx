@@ -32,7 +32,7 @@ const adminData={
 }
 console.log(adminData);
 dispatch(fetchAdminRequest())
-axios.post('http://localhost:5000/admin/login',adminData).then(res=>{
+axios.post('/admin/login',adminData).then(res=>{
    
    
 if(res.data.response){

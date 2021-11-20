@@ -24,7 +24,7 @@ function ShowProductScreen() {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    axios.get(`http://localhost:5000/admin/product/delete/${id}`).then(res => {
+                    axios.get(`/admin/product/delete/${id}`).then(res => {
 
 
                         if (res.data) {

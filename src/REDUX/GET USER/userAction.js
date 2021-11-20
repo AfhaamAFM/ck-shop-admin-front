@@ -31,7 +31,7 @@ export const fetchUserError = (error) => {
 export const fetchUser = () => {
     return (dispatch) => {
         dispatch(fetchUserRequest())
-        axios.get('http://localhost:5000/admin/get-user').then(res => {
+        axios.get('/admin/get-user').then(res => {
 
 
 

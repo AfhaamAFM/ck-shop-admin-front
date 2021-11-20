@@ -152,14 +152,14 @@ return;
         setLoading(true)
         console.log(formData);
         formData.append("image", selectedFile);
-        axios.post("http://localhost:5000/admin/product/addImage", formData).then(response => {
+        axios.post("/admin/product/addImage", formData).then(response => {
             const imageUrl = response.data
 
             let productData = { name, category, subCat, price, description, small, medium, large, imageUrl,_id }
 
 
 
-            axios.post('http://localhost:5000/admin/product/edit',productData).then(response=>{
+            axios.post('/admin/product/edit',productData).then(response=>{
 
             if(response.data.response){
 
@@ -192,8 +192,8 @@ return;
                     <Row className="mb-3">
                         <Form.Group as={Col} sm={12} md={6} controlId="formCategory">
                             <Form.Label>Select category</Form.Label>
-                            <Form.Select onChange={subCatHandler} defaultValue="Category">
-                                <option></option>
+                            <Form.Select onChange={subCatHandler} >
+                                <option defaultValue >Select category </option>
                                 {categoryData ? (
                                     categoryData.map((value) => {
                                         return (
@@ -211,6 +211,7 @@ return;
                             <Form.Label>sub category</Form.Label>
                             <Form.Select
                                 onChange={productHandler} >
+                                    <option defaultValue>Sub Category</option>
                                 {subcategory &&
                                     subcategory.map((value, i) => {
                                         return <option key={i}>{value}</option>;
@@ -224,6 +225,7 @@ return;
                                     setThisProduct(e.target.value);
                                 }}
                             >
+                                 <option defaultValue>Products</option>
                                 {selectedProducts &&
                                     selectedProducts.map((value, i) => {
                                         return <option id={value._id} key={i}>{value.name}</option>;
@@ -256,7 +258,7 @@ return;
                                 <Form.Group as={Col} controlId="formCategory">
                                     <Form.Label>Select category</Form.Label>
                                     <Form.Select value={category} onChange={subCatHandler} disabled={editMode} defaultValue="Category">
-                                        <option disabled> Select category</option>
+                                        <option defaultValue> Select category</option>
                                         {categoryData ? (
                                             categoryData.map((value) => {
                                                 return (
@@ -279,6 +281,7 @@ return;
                                             setSUbCat(e.target.value);
                                         }}
                                     >
+                                         <option defaultValue>Sub Category</option>
                                         {subcategory &&
                                             subcategory.map((value, i) => {
                                                 return <option key={i}>{value}</option>;
