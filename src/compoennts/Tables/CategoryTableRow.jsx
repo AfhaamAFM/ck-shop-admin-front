@@ -30,7 +30,7 @@ function CategoryTableRow({ category, no }) {
 
 
             if (res.data) {
-            
+            dispatch(fetchCategory())
               swal("Category has been deleted!", {
                 icon: "success",
               });

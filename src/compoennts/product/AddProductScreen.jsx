@@ -106,6 +106,10 @@ console.log(reader.result);
 
             return setWarning('Fill all fields')
         }
+        const regexNum =/[0-9]/
+        if(price!==/[0-9]/||small!==/[0-9]/||medium!==/[0-9]/||large!==/[0-9]/){
+            setWarning('Enter valid characters')
+        }
 
 
         // validation end
@@ -164,7 +168,6 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
     }
 
     // submitting the product end
-
 
     return (
         <div className="addProductForm ">

@@ -35,7 +35,7 @@ function Sibebar() {
           <i className="bx bxl-c-plus-plus"></i>
           <span className="logo_name">CK SHOP ADMIN</span>
         </div>
-        <ul className="nav-links">
+        <ul id='navLinks' className="nav-links">
           <li>
             <Link to="/dashboard">
               <i className="bx bx-grid-alt"></i>

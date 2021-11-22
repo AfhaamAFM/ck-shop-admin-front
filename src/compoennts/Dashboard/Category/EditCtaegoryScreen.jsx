@@ -12,6 +12,7 @@ import SUbCategoryROw from "./SUbCategoryROw";
 
 
 function EditCtaegoryScreen() {
+
   const [loading, setLoading] = useState("");
   const dispatch = useDispatch()
   const[newCategory,setNewCategory]=useState('')
@@ -20,6 +21,7 @@ function EditCtaegoryScreen() {
   const [_id, setcurrentId] = useState('')
   const { category: categoryData } = useSelector((state) => state.category);
   const [editMode,setEditMode]=useState(true)
+  const [warning,setWarning]=useState('')
   const { product } = useSelector((state) => state.product);
 const[subCat,setSubCat]=useState('')
 
@@ -27,6 +29,7 @@ const[subCat,setSubCat]=useState('')
 
 
 function editHandler(){
+if(!selectedCategory) return setWarning('select category')
 setEditMode(false)
 }
 function saveHandler(){
@@ -39,6 +42,7 @@ axios.post('/admin/category/edit',{selectedCategory,newCategory}).then((res)=>{
               }
               if (res.data === true) {
                 swal("Added successfully")
+                setEditMode(true)
                 dispatch(fetchCategory())
               }
             })
@@ -81,8 +85,7 @@ axios.post('/admin/category/edit',{selectedCategory,newCategory}).then((res)=>{
                 className="mb-3"
                 onChange={(e) => {
                   setSelectedCategory(e.target.value);
-                }}
-              >
+                }}>
                 <option defaultValue>Show Category</option>
                 {categoryData &&
                   categoryData.map((value, i) => {
@@ -106,6 +109,7 @@ axios.post('/admin/category/edit',{selectedCategory,newCategory}).then((res)=>{
     type="text" placeholder="Enter new category name" disabled={editMode} />
   
   </Form.Group>
+  <h4>{warning}</h4>
             </Form.Group>
               <Button className='my-5' disabled={editMode} 
               onClick={saveHandler}

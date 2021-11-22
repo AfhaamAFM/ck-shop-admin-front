@@ -4,11 +4,12 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux'
 import swal from 'sweetalert'
+import { fetchCategory } from '../../../REDUX/category/categoryAction'
 
 
 
 
-function SUbCategoryROw({ subCategory, no,id }) {
+function SUbCategoryROw({ subCategory, no,id,handleShow }) {
 
   const dispatch = useDispatch()
 const[count,setCount]=useState(0)
@@ -20,6 +21,7 @@ const[count,setCount]=useState(0)
     const subCat = e.target.id
     console.log(subCat);
     const _id=id
+    console.log(id);
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this Category!",
@@ -34,7 +36,7 @@ const[count,setCount]=useState(0)
 
 
             if (res.data) {
-            
+              dispatch(fetchCategory())
               swal("Category has been deleted!", {
                 icon: "success",
               });
@@ -67,7 +69,7 @@ const[count,setCount]=useState(0)
 
           <div className='table-icons'>
             <i className="fas fa-trash-alt" id={subCategory}  onClick={deleteHandler}></i>
-            {/* <i className="fas fa-edit" onClick={editHandler} id={category._id}></i> */}
+            <i className="fas fa-edit" id={id} subcat={subCategory} onClick={handleShow} ></i>
           </div>
         </td>
        
