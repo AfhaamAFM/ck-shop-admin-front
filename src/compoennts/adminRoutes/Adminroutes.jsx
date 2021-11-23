@@ -47,8 +47,14 @@ function Adminroutes() {
                         <>
 
                             <Route path='/userManage' element={<UserManage />} />
+                            <Route path='/userSearch/:keyword' element={<UserManage />} />
+                            <Route path='/userManage/page/:pageNumber' element={<UserManage />} />
+                            <Route path='/userSearch/:keyword/page/:pageNumber' element={<UserManage />} />
+
                             <Route path='/category' element={<CategoryManage />} />
                        <Route path='/product' element ={<ProducScreen/>}/>
+                       
+                       
                         </>
 
                     }

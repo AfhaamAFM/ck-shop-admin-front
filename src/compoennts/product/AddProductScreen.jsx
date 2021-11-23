@@ -158,6 +158,7 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
                 setSelectedFile3('')
                 setSelectedFile4('')
                 swal("Success", "product added sucessfully", "success");
+                setWarning('')
               setLoading(false)
 
 

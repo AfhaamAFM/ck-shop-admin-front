@@ -4,7 +4,9 @@ import { USER_FETCH_ERROR, USER_FETCH_REQUEST, USER_FETCH_SUCCESS} from "./userT
 const userinitialState = {
     loading: true,
     users: [],
-    error: ''
+    error: '',
+    pages:'',
+    page:''
 }
 const userReducer = (state = userinitialState, action) => {
 
@@ -22,7 +24,9 @@ const userReducer = (state = userinitialState, action) => {
 
                 ...state,
                 loading: false,
-                users: action.payload,
+                users: action.payload.users,
+                page:action.payload.page,
+                pages:action.payload.pages,
                 error: ''
 
             }

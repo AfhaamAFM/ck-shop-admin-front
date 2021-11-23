@@ -28,12 +28,10 @@ export const fetchUserError = (error) => {
 
 
 
-export const fetchUser = () => {
+export const fetchUser = (keyword='',pageNumber='') => {
     return (dispatch) => {
         dispatch(fetchUserRequest())
-        axios.get('/admin/get-user').then(res => {
-
-
+        axios.get(`/admin/get-user/?keyword=${keyword}&pageNumber=${pageNumber}`).then(res => {
 
             dispatch(fetchUserSuccess(res.data))
 
@@ -42,13 +40,8 @@ export const fetchUser = () => {
 
         })
 
-    }
+    }}
 
-
-
-
-
-}
 
 // export const userBlocker =()=>{
 

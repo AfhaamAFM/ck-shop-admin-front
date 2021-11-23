@@ -168,7 +168,7 @@ return;
             }else if(response.data){
                 swal("Success", "product edited sucessfully", "success");
               setLoading(false)
-
+              setWarning('')
 
             }
             })
