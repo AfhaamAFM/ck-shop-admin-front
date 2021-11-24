@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCategory } from "../../../REDUX/category/categoryAction";
 import axios from 'axios'
 import swal from 'sweetalert'
-import SUbCategoryROw from "./SUbCategoryROw";
 import EditsubCategoryModal from "./EditsubCategoryModal";
 // import { Container, Row, Table, Col, Button, Tab ,Tabs} from 'react-bootstrap'
 // import SubcategoryTable from '../../Tables/Product'
@@ -16,7 +15,7 @@ function Subctegory() {
   const [loading, setLoading] = useState("");
   const dispatch = useDispatch()
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [subcatgory, setSubCategory] = useState('')
+  const [subcatgory, setSubCategory] = useState([])
   const [_id, setcurrentId] = useState('')
   const { category: categoryData } = useSelector((state) => state.category);
   const [warning,setWarning] = useState('')
@@ -24,6 +23,7 @@ function Subctegory() {
   const { product } = useSelector((state) => state.product);
 const[subCat,setSubCat]=useState('')
 const [show, setShow] = useState(false);
+const[currentData,setCurrentData]=useState('')
 
 let oldsubCat
 
@@ -84,12 +84,10 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
     // if(!e.target.value||!selectedCategory)  return setWarning('Select a category')
     setLoading(true)
     const data =categoryData.find(value => value.category === e.target.value)
-  
+
     data && setcurrentId(data._id)
-    console.log(10);
     data&& setSubCategory(data.subCat)
     data&&setLoading(false)
-    console.log(_id , subcatgory);
   }
 
 
@@ -155,8 +153,8 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
         swal(res.data.response)
       }
       if (res.data === true) {
-    
-        swal("Added successfully")
+
+  swal("Added successfully")
         setWarning('')
         dispatch(fetchCategory())
       }
