@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Form, Row, Table, Button } from "react-bootstrap";
 import Loader from "react-loader-spinner";
-import CategoryTableRow from "../../Tables/CategoryTableRow";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategory } from "../../../REDUX/category/categoryAction";
 import axios from 'axios'
@@ -238,7 +237,6 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
                    
                   </tr>
              </>
-                // <SUbCategoryROw subCategory={value} no={i + 1} key={i} id={_id} handleShow={handleShow}/> 
                 
                 
                 })}

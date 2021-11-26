@@ -5,15 +5,59 @@ import Loader from "react-loader-spinner";
 
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategory } from '../../../REDUX/category/categoryAction'
-import CategoryTableRow from '../../Tables/CategoryTableRow'
 import axios from 'axios'
 import swal from 'sweetalert'
 import Subctegory from '../Category/Subctegory';
-import EditCtaegoryScreen from './EditCtaegoryScreen';
+
+import CategoryEditModal from './CategoryEditModal';
 
 
 
 function CategoryManage() {
+
+
+  const [categoryName, setCategory] = useState('')
+  const { category, loading } = useSelector(state => state.category )
+   const[show,setShow]=useState(false)
+const[newCategory,setNewCategory]=useState('')
+const[oldCategory,setOldCategory]=useState('')
+const[nameError,setError]=useState('')
+
+  const handleClose = () => setShow(false);
+  const handleShow = (e) => {
+    
+    setShow(true);
+    setOldCategory(e.target.id)
+    setNewCategory(e.target.id)
+    console.log(e.target.id)
+  }
+
+
+
+
+  function editHandler(){
+
+    axios.post('/admin/category/edit',{oldCategory,newCategory}).then((res)=>{
+    
+        if (res.data.response) {
+    
+                    swal(res.data.response)
+                  }
+                  if (res.data === true) {
+                    handleClose()
+                    swal("Added successfully")
+                    dispatch(fetchCategory())
+
+                  }
+                })
+    }
+
+
+
+
+
+
+
   const dispatch = useDispatch()
   useEffect(() => {
 
@@ -21,11 +65,6 @@ function CategoryManage() {
     dispatch(fetchCategory())
 
   }, [dispatch])
-
-  const [categoryName, setCategory] = useState('')
-
-
-  const { category, loading } = useSelector(state => state.category)
 
 
 
@@ -42,23 +81,62 @@ function CategoryManage() {
         dispatch(fetchCategory())
       }
 
-    })
+    }) }
+
+    function deleteHandler(event) {
+
+      const id = event.target.id
+      console.log(id);
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this Category!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+  
+            axios.get(`http://localhost:5000/admin/category/delete/${id}`).then(res => {
+  
+  
+              if (res.data) {
+              dispatch(fetchCategory())
+                swal("Category has been deleted!", {
+                  icon: "success",
+                });
+                
+              }
+  
+            })
+            // category/delete/:id
+  
+  
+          } else {
+            swal("Category is safe!");
+          }
+        })}
 
 
-  }
+
+
 
 
   return (
     <>
+
+
+
       <Sibebar />
+
       <div className='home-section'>
         <Container>
-
+<CategoryEditModal setNewCategory={setNewCategory} nameError={nameError} setError={setError} oldCategory={oldCategory} newCategory={newCategory} show={show} handleClose={handleClose} editHandler={editHandler}/>
         <Tabs
   defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
 
-  <Tab eventKey="home" title="Home">
-    <h2>seee</h2>
+  <Tab eventKey="Category" title="Home">
+
   <Row className='align-items-center'>
             <h2>Category List</h2>
             <div className='table-Container' >
@@ -81,7 +159,31 @@ function CategoryManage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {category.map((category, i) => { return <CategoryTableRow category={category} no={i + 1} key={category._id} id={category._id} /> })}
+                    {category.map((category, i) => {
+                    
+                    
+
+
+                    return    <tr key={category._id} >
+                    <td>{i+1}</td>
+                    <td>{category.category}</td>
+                    <td>{category?.subCat.length}</td>
+                    <td>
+            
+                      <div className='table-icons'>
+                        <i className="fas fa-trash-alt " id={category._id} onClick={deleteHandler}></i>
+                        <i className="fas fa-edit" onClick={handleShow} id={category.category}></i>
+                      </div>
+                    </td>
+                   
+                  </tr>
+
+
+               
+                    
+                    
+                    
+                    })}
                   </tbody>
                 </Table>}
 
@@ -99,9 +201,9 @@ function CategoryManage() {
   <Tab eventKey="profile" title="sub category">
     <Subctegory/>
   </Tab>
-  <Tab eventKey="contact" title="EDit">
+  {/* <Tab eventKey="contact" title="EDit">
    <EditCtaegoryScreen/>
-  </Tab>
+  </Tab> */}
 </Tabs>
       
         </Container>

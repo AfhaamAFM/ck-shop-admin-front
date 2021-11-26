@@ -11,7 +11,7 @@ function ProducScreen() {
         <Sibebar />
        
         <div className='home-section'>
-          <Container>
+          <Container fluid>
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
   <Tab eventKey="home" title="Products">
    <ShowProductScreen/>

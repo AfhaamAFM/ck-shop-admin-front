@@ -58,7 +58,7 @@ dispatch(fetchProduct())
                 <div className="table-Container">
                     <Row>
                         <Col sm={12} md={8} className="mx-auto mt-5">
-                            <Table striped bordered hover>
+                            <Table striped bordered hover size='lg'>
                                 <thead>
                                     <tr>
                                         <th>#</th>

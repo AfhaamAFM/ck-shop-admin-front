@@ -4,7 +4,8 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCategory } from "../../REDUX/category/categoryAction";
 import swal from 'sweetalert';
-
+import validator from "../../simple-react-form-validation-helper/validationHelpers";
+// import validator from '../../simple-react-form-validation-helper'
 
 
 
@@ -106,10 +107,10 @@ console.log(reader.result);
 
             return setWarning('Fill all fields')
         }
-        const regexNum =/[0-9]/
-        if(price!==/[0-9]/||small!==/[0-9]/||medium!==/[0-9]/||large!==/[0-9]/){
-            setWarning('Enter valid characters')
-        }
+        // const regexNum =/[0-9]/
+        // if(price!==/[0-9]/||small!==/[0-9]/||medium!==/[0-9]/||large!==/[0-9]/){
+        //     setWarning('Enter valid characters')
+        // }
 
 
         // validation end
@@ -221,7 +222,8 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
                             <Form.Label>Enter Price</Form.Label>
                             <Form.Control value={price} min={1} onChange={(e) => {
                                 setPrice(e.target.value)
-                            }} type='number' />
+                             validator.priceInputBlurHandler(e.target.value,setWarning)
+                            }} type='text' />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formGridDesciption">
                             <Form.Label>Enter description</Form.Label>
@@ -282,7 +284,7 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
                             >
                                 <img src={previewSource1} className='image_preview' alt="productimage" />
                                 <Form.Label>Image 1</Form.Label>
-                                <Form.Control  type="file" size="md" onChange={imageHandler1} />
+                                <Form.Control  accept='image/*'  type="file" size="md" onChange={imageHandler1} />
                             </Form.Group>
                             <Form.Group
                                 as={Col}
@@ -293,7 +295,7 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
                             >
                                 <img src={previewSource2} className='image_preview' alt="productimage" />
                                 <Form.Label>Image 2</Form.Label>
-                                <Form.Control type="file" size="md" onChange={imageHandler2} />
+                                <Form.Control accept='image/*' type="file" size="md" onChange={imageHandler2} />
                             </Form.Group>
                             <Form.Group
                                 as={Col}
@@ -304,7 +306,7 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
                             >
                                 <img src={previewSource3} className='image_preview' alt="productimage" />
                                 <Form.Label>Image 3</Form.Label>
-                                <Form.Control type="file" size="md" onChange={imageHandler3} />
+                                <Form.Control  accept='image/*' type="file" size="md" onChange={imageHandler3} />
                             </Form.Group>
                             <Form.Group
                                 as={Col}
@@ -315,7 +317,7 @@ const selectedFile=[selectedFile1,selectedFile2,selectedFile3,selectedFile4]
                             >
                                 <img src={previewSource4} className='image_preview' alt="productimage" />
                                 <Form.Label>Image 4</Form.Label>
-                                <Form.Control type="file" size="md" onChange={imageHandler4} />
+                                <Form.Control  accept='image/*' type="file" size="md" onChange={imageHandler4} />
                             </Form.Group>
                         </Row>
 
