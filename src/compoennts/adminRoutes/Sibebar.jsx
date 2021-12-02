@@ -54,6 +54,19 @@ function Sibebar() {
               <span className="links_name">Products</span>
             </Link>
           </li>
+          <li>
+            <Link to='/orders'>
+              <i className="bx bx-box"></i>
+              <span className="links_name">Orders</span>
+            </Link>
+          </li>
+          <li>
+
+            <Link to='/offers'>
+              <i className="bx bx-box"></i>
+              <span className="links_name">Offers</span>
+            </Link>
+          </li>
          
           {/* <li>
             <a href="#">

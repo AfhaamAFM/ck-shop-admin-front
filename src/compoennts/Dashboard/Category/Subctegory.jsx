@@ -186,7 +186,7 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
                 
                 {categoryData &&
                   categoryData.map((value, i) => {
-                    return (
+                    return(
                       <option id={value._id} key={i}>
                         {value.category}
                       </option>
@@ -223,7 +223,7 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
                         // const {subCat}=category
                         // const count=subCat?.length
                     
-                    return   <>  <tr >
+                    return<tr key={i}>
                     <td>{i}</td>
                     <td>{value}</td>
                     {/* <td>{count}</td> */}
@@ -236,7 +236,7 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
                     </td>
                    
                   </tr>
-             </>
+             
                 
                 
                 })}

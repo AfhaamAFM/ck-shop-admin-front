@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './bootstrap.min.css'
+import 'antd/dist/antd.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 
 ReactDOM.render(
   <React.StrictMode>

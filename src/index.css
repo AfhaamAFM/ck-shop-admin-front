@@ -534,3 +534,9 @@ align-content: space-around;
       justify-content: space-around;
       padding: 5 px;
 }
+.buttonIcons:hover{
+
+
+  cursor: pointer;
+    color: goldenrod;
+}

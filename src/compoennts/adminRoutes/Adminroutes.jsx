@@ -10,13 +10,14 @@ import Dashboard from '../Dashboard/Dashboard';
 import UserManage from '../Dashboard/UserManage';
 import CategoryManage from '../Dashboard/Category/CategoryManage';
 import ProducScreen from '../product/ProducScreen';
+import OrderScreen from '../orders/Orderscreen';
+import OfferScreen from '../Offers/OfferScreen';
 
 
 function Adminroutes() {
 
     const dispatch = useDispatch()
     const { adminActive } = useSelector(state => state.admin)
-    console.log('wroked' + adminActive);
 
 
     useEffect(() => {
@@ -50,6 +51,10 @@ function Adminroutes() {
                             <Route path='/userSearch/:keyword' element={<UserManage />} />
                             <Route path='/userManage/page/:pageNumber' element={<UserManage />} />
                             <Route path='/userSearch/:keyword/page/:pageNumber' element={<UserManage />} />
+
+
+                            <Route path='/orders' element={<OrderScreen />} />
+                            <Route path='/offers' element={<OfferScreen/>} />
 
                             <Route path='/category' element={<CategoryManage />} />
                        <Route path='/product' element ={<ProducScreen/>}/>
