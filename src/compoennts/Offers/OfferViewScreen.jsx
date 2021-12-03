@@ -36,6 +36,9 @@ function OfferViewScreen() {
 
     // Add offer function 
 
+
+   
+
     function addOfferHandler() {
 
         if (!offerName || !expiryDate || !percentage) {

@@ -33,11 +33,6 @@ function Adminroutes() {
         <div>
             <Router>
 
-                <Container>
-
-
-                </Container>
-
                 <Routes>
 
 
