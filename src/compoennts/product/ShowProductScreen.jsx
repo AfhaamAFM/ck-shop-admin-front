@@ -23,8 +23,10 @@ function ShowProductScreen() {
     // Apply offer Modal controller
     const [offerShow, setOfferShow] = useState(false);
 
-    const offerHandleClose = () => {setViewMode(false) 
-        setOfferShow(false);}
+    const offerHandleClose = () => {
+        setViewMode(false)
+        setOfferShow(false);
+    }
     const offerHandleShow = () => setOfferShow(true);
 
     // redux controller
@@ -64,7 +66,7 @@ function ShowProductScreen() {
 
     // 
     async function showOfferHandler(e) {
-  
+
         const selectedOffer = offers.find(value => value.offerName === e.target.value)
         const { offerName, percentage, expiryDate, _id } = selectedOffer
         const formatedDate = format.dateFormatter(expiryDate)
@@ -94,6 +96,7 @@ function ShowProductScreen() {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                dispatch(fetchProduct())
                 return offerHandleClose()
             }
 
@@ -122,14 +125,46 @@ function ShowProductScreen() {
         const { offerId, offerName, expiryDate, percentage } = offer
         setOfferName(offerName)
         setPercentage(percentage)
-        setExpiryDate( format.dateFormatter(expiryDate))
+        setExpiryDate(format.dateFormatter(expiryDate))
         console.log(offer);
 
         offerHandleShow()
 
-
+       
     }
     //   show offer handler
+
+    // remove offer
+
+    function removeOfferHandler(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.get(`/offer/removeOffer/${productId}`).then(res => {
+                    if (res.data) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Offer is removed',
+                            'success'
+                        )
+                        dispatch(fetchProduct())
+                        return offerHandleClose()
+                    }
+
+                })
+            }
+        })
+
+
+    }
     function showOfferModal(e) {
         const id = e.target.id
 
@@ -181,7 +216,7 @@ function ShowProductScreen() {
                                     <td >{no + 1}</td>
                                     <td > <img className='table_image' src={product.imageUrl[0].img} id={product.imageUrl[0]._id} alt="productIMage" /> </td>
                                     {!product.isOffer ? <td > {product.name}</td>
-                                        : <td > {product.name} <Badge style={{cursor:'pointer'}} className='me-auto' bg="success" id={product._id} onClick={seeOfferHandler}>Show offer</Badge></td>}
+                                        : <td > {product.name} <Badge style={{ cursor: 'pointer' }} className='me-auto' bg="success" id={product._id} onClick={seeOfferHandler}>Show offer</Badge></td>}
                                     <td >{product.category}</td>
                                     <td >{product.subCat}</td>
                                     <td >{product.price}</td>
@@ -247,7 +282,7 @@ function ShowProductScreen() {
                     <Button variant="secondary" onClick={offerHandleClose}>
                         Close
                     </Button>
-                    {viewMode ? <Button variant="danger" id={offerId} onClick={applyOfferHandler}>Remove Offer</Button> : <Button variant="primary" id={offerId} onClick={applyOfferHandler}>Apply offer</Button>}
+                    {viewMode ? <Button variant="danger" id={offerId} onClick={removeOfferHandler}>Remove Offer</Button> : <Button variant="primary" id={offerId} onClick={applyOfferHandler}>Apply offer</Button>}
                 </Modal.Footer>
             </Modal>
 
