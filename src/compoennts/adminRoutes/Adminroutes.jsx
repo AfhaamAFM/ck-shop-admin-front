@@ -12,6 +12,7 @@ import CategoryManage from '../Dashboard/Category/CategoryManage';
 import ProducScreen from '../product/ProducScreen';
 import OrderScreen from '../orders/Orderscreen';
 import OfferScreen from '../Offers/OfferScreen';
+import SalesScreen from '../Sales/SalesScreen';
 
 
 function Adminroutes() {
@@ -49,12 +50,14 @@ function Adminroutes() {
 
 
                             <Route path='/orders' element={<OrderScreen />} />
-                            <Route path='/offers' element={<OfferScreen/>} />
+                            <Route path='/offers' element={<OfferScreen />} />
 
                             <Route path='/category' element={<CategoryManage />} />
-                       <Route path='/product' element ={<ProducScreen/>}/>
-                       
-                       
+                            <Route path='/product' element={<ProducScreen />} />
+                            <Route path='/sales' element={<SalesScreen />} />
+
+
+
                         </>
 
                     }

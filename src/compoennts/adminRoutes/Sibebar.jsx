@@ -68,12 +68,12 @@ function Sibebar() {
             </Link>
           </li>
          
-          {/* <li>
-            <a href="#">
-              <i className="bx bx-list-ul"></i>
-              <span className="links_name">Order list</span>
-            </a>
-          </li> */}
+          <li>
+            <Link to='/sales'>
+              <i class="fas fa-balance-scale-left"></i>
+              <span className="links_name">Sales</span>
+            </Link>
+          </li>
           {/* <li>
             <a href="#">
               <i className="bx bx-pie-chart-alt-2"></i>
