@@ -43,6 +43,7 @@ function ImageEditModal({editImageShow,
         <Modal
         size="lg"
         show={editImageShow}
+        backdrop="static"
         onHide={() => seteditImageShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
