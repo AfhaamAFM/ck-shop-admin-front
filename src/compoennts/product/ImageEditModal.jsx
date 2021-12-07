@@ -71,7 +71,7 @@ function ImageEditModal({editImageShow,
         <Cropper
           style={{ height: 400, width: "100%" }}
           zoomTo={0.5}
-          initialAspectRatio={1}
+          aspectRatio={3/4}
           preview=".img-preview"
           src={image}
           viewMode={1}

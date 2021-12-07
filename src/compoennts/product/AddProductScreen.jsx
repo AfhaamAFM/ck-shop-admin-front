@@ -59,12 +59,12 @@ function AddProductScreen() {
     const { category: categoryData } = useSelector(state => state.category)
     const [addLoading, setLoading] = useState(false)
 
-    const [cropper, setCropper] = useState();
 
 
 
 
     // image modal controller start
+    const [cropper, setCropper] = useState();
 
     const [selectedFile1, setSelectedFile1] = useState('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
     const [selectedFile2, setSelectedFile2] = useState('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')

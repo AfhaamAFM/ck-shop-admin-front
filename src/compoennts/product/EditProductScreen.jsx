@@ -1,10 +1,49 @@
 import React, { useEffect, useState,useRef } from "react";
-import { Row, Col, Form, Button, FloatingLabel, Spinner } from "react-bootstrap";
+import { Row, Col, Form, Button, FloatingLabel, Spinner,Image,Placeholder } from "react-bootstrap";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategory } from "../../REDUX/category/categoryAction";
 import { fetchProduct } from "../../REDUX/PRODUCTS/productAction";
 import swal from 'sweetalert'
+import ImageEditModal from "./ImageEditModal";
+
+
+
+
+
+
+
+
+const cloudinaryUpload = (image,oldImage) => {
+
+    return new Promise(async (resolve, reject) => {
+const {public_id}=oldImage
+
+        axios.post(`/admin/product/uploadImage?public_id=${public_id}`, { image }).then(response => {
+
+            return resolve(response.data)
+        })
+
+    })
+
+}
+
+
+function uploadImage(setUploadSuccess,setImageLoading, setImage, setSelectedFile, setUploadMode, selectedFile,image) {
+
+    setUploadSuccess(false)
+    setImageLoading(true)
+    cloudinaryUpload(selectedFile,image).then(response => {
+
+        setImage(response)
+        setSelectedFile(response.img)
+        setImageLoading(false)
+        setUploadMode(false)
+        setUploadSuccess(true)
+    })
+}
+
+
 
 function EditProductScreen() {
     const dispatch = useDispatch();
@@ -26,16 +65,69 @@ function EditProductScreen() {
     const [editMode, setEditMode] = useState(true)
     const [thisProduct, setThisProduct] = useState('')
     const [selectedProducts, setSelectedProducts] = useState('')
-    const [previewSource1, setPreviewSOurce1] = useState('')
-    const [previewSource2, setPreviewSOurce2] = useState('')
-    const [previewSource3, setPreviewSOurce3] = useState('')
-    const [previewSource4, setPreviewSOurce4] = useState('')
     const [_id,setid]=useState()
+
+
+// modales states and function
+const [cropper, setCropper] = useState();
+
+const [selectedFile1, setSelectedFile1] = useState('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+const [selectedFile2, setSelectedFile2] = useState('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+const [selectedFile3, setSelectedFile3] = useState('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+const [selectedFile4, setSelectedFile4] = useState('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+
+
+
+const [image1, setImage1] = useState('')
+const [image2, setImage2] = useState('')
+const [image3, setImage3] = useState('')
+const [image4, setImage4] = useState('')
+
+const [editImageShow1, seteditImageShow1] = useState(false);
+const [editImageShow2, seteditImageShow2] = useState(false);
+const [editImageShow3, seteditImageShow3] = useState(false);
+const [editImageShow4, seteditImageShow4] = useState(false);
+
+const [uploadMode1, setUploadMode1] = useState(false)
+const [uploadMode2, setUploadMode2] = useState(false)
+const [uploadMode3, setUploadMode3] = useState(false)
+const [uploadMode4, setUploadMode4] = useState(false)
+
+const [imageLoading1, setImageLoading1] = useState(false)
+const [imageLoading2, setImageLoading2] = useState(false)
+const [imageLoading3, setImageLoading3] = useState(false)
+const [imageLoading4, setImageLoading4] = useState(false)
+
+
+const [upload1Success, setUpload1Success] = useState(false)
+const [upload2Success, setUpload2Success] = useState(false)
+const [upload3Success, setUpload3Success] = useState(false)
+const [upload4Success, setUpload4Success] = useState(false)
+
+const uploadImage1 = () => { uploadImage(setUpload1Success, setImageLoading1, setImage1, setSelectedFile1, setUploadMode1, selectedFile1,image1) }
+const uploadImage2 = () => { uploadImage(setUpload2Success, setImageLoading2, setImage2, setSelectedFile2, setUploadMode2, selectedFile2,image2) }
+const uploadImage3 = () => { uploadImage(setUpload3Success, setImageLoading3, setImage3, setSelectedFile3, setUploadMode3, selectedFile3,image3) }
+const uploadImage4 = () => { uploadImage(setUpload4Success, setImageLoading4, setImage4, setSelectedFile4, setUploadMode4, selectedFile4,image4) }
+
+
+const imageCropShow1 = () => { seteditImageShow1(true) }
+const imageCropShow2 = () => { seteditImageShow2(true) }
+const imageCropShow3 = () => { seteditImageShow3(true) }
+const imageCropShow4 = () => { seteditImageShow4(true) }
+
+// get crop data
+const getCropData = (setState,state) => {
+
+    if (typeof cropper !== "undefined") {
+        setState(cropper.getCroppedCanvas().toDataURL())
+    }
+
+};
  
     function productShowHandler() {
 
-const data = product.filter(value=>value.name===thisProduct)
-const editThis =data[0]
+const data = product.find(value=>value.name===thisProduct)
+const editThis =data
 setEditMode(false)
 setName(editThis.name)
 setCategory(editThis.category)
@@ -47,13 +139,17 @@ setSmall(editThis.small)
 setMedium(editThis.medium)
 setLarge(editThis.large)
 setid(editThis._id)
-editThis.imageUrl.map(value=>{
-  setPreviewSOurce1(value.img)
- setPreviewSOurce2(value.img)
- setPreviewSOurce3(value.img)
-setPreviewSOurce4(value.img)
+setImage1(editThis.imageUrl[0])
+setImage2(editThis.imageUrl[1])
+setImage3(editThis.imageUrl[2])
+setImage4(editThis.imageUrl[3])
+
+setSelectedFile1(image1.img)
+setSelectedFile2(image2.img)
+setSelectedFile3(image3.img)
+setSelectedFile4(image4.img)
+
 return;
-})
 
 
     }
@@ -63,48 +159,7 @@ return;
 
 
     // IMAGE HANDLER START
-    function makeSourcePreview(image, state) {
-
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onloadend = () => {
-            state(reader.result)
-        }
-        console.log(reader.result);
-    }
-
-
-
-    function imageHandler1(e) {
-
-        makeSourcePreview(e.target.files[0], setPreviewSOurce1)
-        console.log(e.target);
-        setSelectedFile(prev => [...prev, e.target.files[0]])
-    }
-
-
-    function imageHandler2(e) {
-
-        makeSourcePreview(e.target.files[0], setPreviewSOurce2)
-        console.log(e.target);
-        setSelectedFile(prev => [...prev, e.target.files[0]])
-    }
-
-
-    function imageHandler3(e) {
-
-        makeSourcePreview(e.target.files[0], setPreviewSOurce3)
-        console.log(e.target);
-        setSelectedFile(prev => [...prev, e.target.files[0]])
-    }
-
-
-    function imageHandler4(e) {
-
-        makeSourcePreview(e.target.files[0], setPreviewSOurce4)
-        console.log(e.target);
-        setSelectedFile(prev => [...prev, e.target.files[0]])
-    }
+ 
 
     // iMAGE HANDLER END
 
@@ -181,9 +236,60 @@ return;
         dispatch(fetchProduct())
     }, [category, dispatch,thisProduct])
 
-
+console.log(image1);
     return (
         <div>
+
+
+
+ {/* Image crop modall */}
+
+ <ImageEditModal editImageShow={editImageShow1}
+                seteditImageShow={seteditImageShow1}
+                ShowImageHandler={() => {
+                    getCropData(setSelectedFile1, selectedFile1)
+                    setUploadMode1(true)
+                    seteditImageShow1(false)
+                }}
+                setCropper={setCropper}
+
+            />
+
+
+            <ImageEditModal editImageShow={editImageShow2}
+                seteditImageShow={seteditImageShow2}
+                ShowImageHandler={() => {
+                    getCropData(setSelectedFile2)
+                    setUploadMode2(true)
+                    seteditImageShow2(false)
+                }}
+                setCropper={setCropper}
+
+            />
+            <ImageEditModal editImageShow={editImageShow3}
+                seteditImageShow={seteditImageShow3}
+                ShowImageHandler={() => {
+                    getCropData(setSelectedFile3)
+                    setUploadMode3(true)
+                    seteditImageShow3(false)
+                }}
+                setCropper={setCropper}
+
+            />
+            <ImageEditModal editImageShow={editImageShow4}
+                seteditImageShow={seteditImageShow4}
+                ShowImageHandler={() => {
+                    getCropData(setSelectedFile4)
+                    setUploadMode4(true)
+                    seteditImageShow4(false)
+                }}
+                setCropper={setCropper}
+
+            />
+            {/* image crop modal end */}
+
+
+
             <div className="addProductForm ">
                 <h1 variant="border-primary" className='mb-5'>Edit Product</h1>
                 <Row>
@@ -361,52 +467,72 @@ return;
                             <h5>Total quantity: {quantity}</h5>
 
                             <Row>
-                                <Form.Group
-                                    as={Col}
-                                    sm={12}
-                                    md={6}
-                                    controlId="formFileLg"
-                                    className="mb-3"
-                                >
+                            <Col sm={12} md={6} className="mb-3"
+                            >
+                                <Row>
+                                    <Col className='d-flex'>
+                                        <Image src={selectedFile1} className='image_preview mb-3' alt="productimage" fluid />
+                                        {upload1Success && <h4 style={{ color: 'green' }}> <i className="fas fa-check"></i></h4>}
+                                        <h6 className='m-3'> Image 1</h6>
+                                    </Col>
+                                    {imageLoading1 ? <Placeholder as="p" animation="glow">
+                                        <Placeholder xs={12} bg='danger' size='lg' />
+                                    </Placeholder> : uploadMode1 ?
+                                        <Button variant='danger' onClick={uploadImage1} className='my-3' >Upload Image 1</Button>
+                                        : <Button variant='danger' onClick={imageCropShow1} className='my-3' > Select Image 1</Button>}
 
-                                    <img src={previewSource1} className='image_preview' alt="productimage" />
-                                    <Form.Label>Image 1</Form.Label>
-                                    <Form.Control type="file" size="md" disabled={editMode} onChange={imageHandler1} />
-                                </Form.Group>
-                                <Form.Group
-                                    as={Col}
-                                    sm={12}
-                                    md={6}
-                                    controlId="formFileLg"
-                                    className="mb-3"
-                                >
-                                    <img src={previewSource2} className='image_preview' alt="productimage" />
-                                    <Form.Label>Image 2</Form.Label>
-                                    <Form.Control type="file" size="md" disabled={editMode} onChange={imageHandler2} />
-                                </Form.Group>
-                                <Form.Group
-                                    as={Col}
-                                    sm={12}
-                                    md={6}
-                                    controlId="formFileLg"
-                                    className="mb-3"
-                                >
-                                    <img src={previewSource3} className='image_preview' alt="productimage" />
-                                    <Form.Label>Image 3</Form.Label>
-                                    <Form.Control type="file" size="md" disabled={editMode} onChange={imageHandler3} />
-                                </Form.Group>
-                                <Form.Group
-                                    as={Col}
-                                    sm={12}
-                                    md={6}
-                                    controlId="formFileLg"
-                                    className="mb-3"
-                                >.
-                                    <img src={previewSource4} className='image_preview' alt="productimage" />
+                                </Row>
+                            </Col>
 
-                                    <Form.Label>Image 4</Form.Label>
-                                    <Form.Control type="file" size="md" disabled={editMode} onChange={imageHandler4} />
-                                </Form.Group>
+                            <Col sm={12} md={6} className="mb-3"
+                            >
+                                <Row>
+                                    <Col className='d-flex'>
+                                        <Image src={selectedFile2} className='image_preview mb-3' alt="productimage" fluid />
+                                        {upload2Success && <h4 style={{ color: 'green' }}> <i className="fas fa-check"></i></h4>}
+                                        <h6 className='m-3'> Image 2</h6>
+                                    </Col>
+                                    {imageLoading2 ? <Placeholder as="p" animation="glow">
+                                        <Placeholder xs={12} bg='danger' size='lg' />
+                                    </Placeholder> : uploadMode2 ?
+                                        <Button variant='danger' onClick={uploadImage2} className='my-3' >Upload Image 2</Button>
+                                        : <Button variant='danger' onClick={imageCropShow2} className='my-3' > Select Image 2</Button>}
+
+                                </Row>
+                            </Col>
+
+                            <Col sm={12} md={6} className="mb-3"
+                            >
+                                <Row>
+                                    <Col className='d-flex'>
+                                        <Image src={selectedFile3} className='image_preview mb-3' alt="productimage" fluid />
+                                        {upload3Success && <h4 style={{ color: 'green' }}> <i className="fas fa-check"></i></h4>}
+                                        <h6 className='m-3'> Image 3</h6>
+                                    </Col>
+                                    {imageLoading3 ? <Placeholder as="p" animation="glow">
+                                        <Placeholder xs={12} bg='danger' size='lg' />
+                                    </Placeholder> : uploadMode3 ?
+                                        <Button variant='danger' onClick={uploadImage3} className='my-3' >Upload Image 3</Button>
+                                        : <Button variant='danger' onClick={imageCropShow3} className='my-3' > Select Image 3</Button>}
+
+                                </Row>
+                            </Col>
+                            <Col sm={12} md={6} className="mb-3"
+                            >
+                                <Row>
+                                    <Col className='d-flex'>
+                                        <Image src={selectedFile4} className='image_preview mb-3' alt="productimage" fluid />
+                                        {upload4Success && <h4 style={{ color: 'green' }}> <i className="fas fa-check"></i></h4>}
+                                        <h6 className='m-3'> Image 4</h6>
+                                    </Col>
+                                    {imageLoading4 ? <Placeholder as="p" animation="glow">
+                                        <Placeholder xs={12} bg='danger' size='lg' />
+                                    </Placeholder> : uploadMode4 ?
+                                        <Button variant='danger' onClick={uploadImage4} className='my-3' >Upload Image 4</Button>
+                                        : <Button variant='danger' onClick={imageCropShow4} className='my-3' > Select Image 4</Button>}
+
+                                </Row>
+                            </Col>
                             </Row>
                             {addLoading?<Spinner animation="border" />
                        : <Button variant="primary" type="submit">
