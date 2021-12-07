@@ -1,8 +1,13 @@
 import React from 'react'
 import { Container, Row, Col, Form,Table } from 'react-bootstrap'
 import { Button } from 'antd';
+import DataTable from 'react-data-table-component';
 
 function SalesReportScreen() {
+
+
+
+    
     return (
         <>
             <Container>
