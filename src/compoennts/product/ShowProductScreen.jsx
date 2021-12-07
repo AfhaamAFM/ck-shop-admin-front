@@ -52,10 +52,13 @@ function ShowProductScreen() {
                 axios.get(`/admin/product/delete/${id}`).then(res => {
 
                     if (res.data) {
-                        dispatch(fetchProduct())
+                      
                         swal("Product has been deleted!", {
                             icon: "success",
-                        });
+                        }).then(k=>{
+
+                            dispatch(fetchProduct())
+                        })
                     }
                 })
             } else {

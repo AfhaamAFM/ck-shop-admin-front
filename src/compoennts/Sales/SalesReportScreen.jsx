@@ -17,7 +17,6 @@ function SalesReportScreen() {
                     <Col md={4} className='d-flex align-content-around'>
                         <h6>Filter <i className="fas fa-filter"></i></h6>
                         <Button.Group>
-
                             <Button className=' mx-2' type="primary" shape="round" >Year</Button>
                             <Button className=' mx-2' type="primary" shape="round"  >Month</Button>
                             <Button className=' mx-2' type="primary" shape="round"  >Day</Button>
