@@ -3,8 +3,9 @@ import adminReducer from "./admin/adminReducer";
 import userReducer from "./GET USER/userReducer";
 import categoryReducer from "./category/categoryReducer";
 import productReducer from "./PRODUCTS/productReducer";
-import orderReducer from "./ORDERSTORE/orderReducer";
 import offerReducer from "./OFFER/offerReducer";
+import { orderReducer } from "./ORDERSTORE/orderReducer";
+import {salesReducer} from "./ORDERSTORE/orderReducer";
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     category: categoryReducer,
     product: productReducer,
     order:orderReducer,
-    offer:offerReducer
+    offer:offerReducer,
+    sales:salesReducer
 })
 export default rootReducer
 

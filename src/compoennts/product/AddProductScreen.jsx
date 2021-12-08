@@ -168,7 +168,6 @@ function AddProductScreen() {
             image1,image2,image3,image4
         ]
       
-        console.log(imageUrl);
         let productData = { name, category, subCat, price, description, small, medium, large, imageUrl }
         setLoading(true)
 

@@ -6,7 +6,7 @@ import { fetchCategory } from "../../REDUX/category/categoryAction";
 import { fetchProduct } from "../../REDUX/PRODUCTS/productAction";
 import swal from 'sweetalert'
 import ImageEditModal from "./ImageEditModal";
-
+import Swal from "sweetalert2";
 
 
 
@@ -124,10 +124,18 @@ const getCropData = (setState,state) => {
 
 };
  
-    function productShowHandler() {
+ async function productShowHandler() {
 
-const data = product.find(value=>value.name===thisProduct)
+const data = await product.find(value=>value.name===thisProduct)
 const editThis =data
+setImage1(editThis.imageUrl[0])
+setImage2(editThis.imageUrl[1])
+setImage3(editThis.imageUrl[2])
+setImage4(editThis.imageUrl[3])
+setSelectedFile1(image1.img)
+setSelectedFile2(image2.img)
+setSelectedFile3(image3.img)
+setSelectedFile4(image4.img)
 setEditMode(false)
 setName(editThis.name)
 setCategory(editThis.category)
@@ -139,15 +147,6 @@ setSmall(editThis.small)
 setMedium(editThis.medium)
 setLarge(editThis.large)
 setid(editThis._id)
-setImage1(editThis.imageUrl[0])
-setImage2(editThis.imageUrl[1])
-setImage3(editThis.imageUrl[2])
-setImage4(editThis.imageUrl[3])
-
-setSelectedFile1(image1.img)
-setSelectedFile2(image2.img)
-setSelectedFile3(image3.img)
-setSelectedFile4(image4.img)
 
 return;
 
@@ -174,69 +173,74 @@ return;
     };
 
     function productHandler(e) {
-        console.log('reachd');
-        console.log(e.target.value);
+       
         const selected = product.filter((value) => value.category === category && value.subCat === e.target.value)
-        console.log(selected);
+    
         setSelectedProducts(selected)
     }
 
-
-
     function handleSubmitHandler(e) {
-
-        // console.log({name,category,subCat,price,description,small,medium,large,quantity,selectedFile});
         e.preventDefault()
         // validation start
         if (name === '' || category === '' || subCat === '' || price === '' || description === '') {
 
             return setWarning('Fill all fields')
         }
+         if (!image1||!image2||!image3||!image4) {
+
+            return setWarning('Upload all images')
+        }
 
 
         // validation end
 
-        if (selectedFile.length < 4 || selectedFile.length > 4) {
-            return setWarning('upload 4 images')
-        }
-        let formData = new FormData();
 
-        selectedFile.forEach(file => {
-            formData.append("image", file);
-        })
+
+        const imageUrl = [
+            image1,image2,image3,image4
+        ]
+      
+        
+        let productData = { name, category, subCat, price, description, small, medium, large, imageUrl,_id }
         setLoading(true)
-        console.log(formData);
-        formData.append("image", selectedFile);
-        axios.post("/admin/product/addImage", formData).then(response => {
-            const imageUrl = response.data
 
-            let productData = { name, category, subCat, price, description, small, medium, large, imageUrl,_id }
+            axios.post('/admin/product/edit', productData).then(response => {
+
+                if (response.data.response) {
+
+                    setWarning(response.data.response)
+                    setLoading(false)
+                } else if (response.data) {
+                    
+                      
+dispatch(fetchProduct())
+                    setName('')
+                    setCategory('')
+                    setPrice()
+                    setDescription('')
+                    setSmall(0)
+                    setMedium(0)
+                    setLarge(0)
+                    setSelectedFile1('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+                    setSelectedFile2('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+                    setSelectedFile3('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+                    setSelectedFile4('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
+                    swal("Success", "product Edited sucessfully", "success");
+                    setWarning('')
+                    setLoading(false)
+                setUpload1Success(false)
 
 
-
-            axios.post('/admin/product/edit',productData).then(response=>{
-
-            if(response.data.response){
-
-                setWarning(response.data.response)
-                setLoading(false)
-            }else if(response.data){
-                swal("Success", "product edited sucessfully", "success");
-              setLoading(false)
-              setWarning('')
-
-            }
+                }
             })
 
-        })
+       
     }
-
 
     useEffect(() => {
         dispatch(fetchProduct())
     }, [category, dispatch,thisProduct])
 
-console.log(image1);
     return (
         <div>
 
@@ -479,7 +483,7 @@ console.log(image1);
                                         <Placeholder xs={12} bg='danger' size='lg' />
                                     </Placeholder> : uploadMode1 ?
                                         <Button variant='danger' onClick={uploadImage1} className='my-3' >Upload Image 1</Button>
-                                        : <Button variant='danger' onClick={imageCropShow1} className='my-3' > Select Image 1</Button>}
+                                        : <Button variant='danger' disabled={editMode} onClick={imageCropShow1} className='my-3' > Select Image 1</Button>}
 
                                 </Row>
                             </Col>
@@ -496,7 +500,7 @@ console.log(image1);
                                         <Placeholder xs={12} bg='danger' size='lg' />
                                     </Placeholder> : uploadMode2 ?
                                         <Button variant='danger' onClick={uploadImage2} className='my-3' >Upload Image 2</Button>
-                                        : <Button variant='danger' onClick={imageCropShow2} className='my-3' > Select Image 2</Button>}
+                                        : <Button variant='danger' disabled={editMode} onClick={imageCropShow2} className='my-3' > Select Image 2</Button>}
 
                                 </Row>
                             </Col>
@@ -513,7 +517,7 @@ console.log(image1);
                                         <Placeholder xs={12} bg='danger' size='lg' />
                                     </Placeholder> : uploadMode3 ?
                                         <Button variant='danger' onClick={uploadImage3} className='my-3' >Upload Image 3</Button>
-                                        : <Button variant='danger' onClick={imageCropShow3} className='my-3' > Select Image 3</Button>}
+                                        : <Button variant='danger' disabled={editMode} onClick={imageCropShow3} className='my-3' > Select Image 3</Button>}
 
                                 </Row>
                             </Col>
@@ -529,7 +533,7 @@ console.log(image1);
                                         <Placeholder xs={12} bg='danger' size='lg' />
                                     </Placeholder> : uploadMode4 ?
                                         <Button variant='danger' onClick={uploadImage4} className='my-3' >Upload Image 4</Button>
-                                        : <Button variant='danger' onClick={imageCropShow4} className='my-3' > Select Image 4</Button>}
+                                        : <Button variant='danger' disabled={editMode} onClick={imageCropShow4} className='my-3' > Select Image 4</Button>}
 
                                 </Row>
                             </Col>
