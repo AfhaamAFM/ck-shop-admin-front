@@ -1,191 +1,143 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sibebar from "../adminRoutes/Sibebar";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../REDUX/GET USER/userAction";
 import { fetchDashboardCount } from "../../REDUX/admin/adminAction";
+import Loader from "react-loader-spinner";
+import { Table } from "react-bootstrap";
+import { fetchOrders } from "../../REDUX/ORDERSTORE/orderAction";
+import {Link} from 'react-router-dom'
+
+
 function Dashboard() {
-const dispatch = useDispatch()
+  const [totalSales, setTotalSales] = useState();
+  const [totalOrders, setTotalOrders] = useState();
+  const [totalDelivary, setTotalDelivary] = useState();
+  const [totalProduct, setTotalProduct] = useState();
+  const [orderHere, setOrderHere] = useState();
 
-  useEffect(()=>{
+  const dispatch = useDispatch();
+  const { countDetails, loading: countLoading } = useSelector(
+    (state) => state.dashboardCount
+  );
+  const { orders, loading: orderLoading } = useSelector((state) => state.order);
 
-    dispatch(fetchUser())
-    dispatch(fetchDashboardCount())
-    
-    },[])
+  useEffect(() => {
+    dispatch(fetchUser());
+    dispatch(fetchDashboardCount());
+    dispatch(fetchOrders());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!countDetails) return;
+    setTotalSales(countDetails.totalSalesAmount);
+    setTotalProduct(countDetails.totalProduct);
+    setTotalDelivary(countDetails.totalDeliveryCount);
+    setTotalOrders(countDetails.totalOrders);
+
+    if (!orders) return;
+
+    const extOrder = orders.splice(0, 10);
+    setOrderHere(extOrder);
+  }, [dispatch, countDetails]);
+
+  console.log(orderHere);
   return (
     <>
       <Sibebar />
-   
+
       <section className="home-section">
         <div className="home-content">
-          <div className="overview-boxes">
-            <div className="box">
-              <div className="right-side">
-                <div className="box-topic">Total Order</div>
-                <div className="number">40,876</div>
-                <div className="indicator">
-                  <i className="bx bx-up-arrow-alt"></i>
-                  <span className="text">Up from yesterday</span>
+          {countLoading ? (
+            <Loader
+              type="Puff"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              timeout={3000} //3 secs
+            />
+          ) : (
+            <div className="overview-boxes">
+              <div className="box">
+                <div className="right-side">
+                  <div className="box-topic">Total Order</div>
+                  <div className="number">{totalOrders}</div>
+                  <div className="indicator">
+                    <i className="bx bx-up-arrow-alt"></i>
+                    <span className="text">Up from yesterday</span>
+                  </div>
                 </div>
+                <i className="bx bx-cart-alt cart"></i>
               </div>
-              <i className="bx bx-cart-alt cart"></i>
-            </div>
-            <div className="box">
-              <div className="right-side">
-                <div className="box-topic">Total Sales</div>
-                <div className="number">38,876</div>
-                <div className="indicator">
-                  <i className="bx bx-up-arrow-alt"></i>
-                  <span className="text">Up from yesterday</span>
+              <div className="box">
+                <div className="right-side">
+                  <div className="box-topic">Total Sales</div>
+                  <div className="number">₹{totalSales}</div>
+                  <div className="indicator">
+                    <i className="bx bx-up-arrow-alt"></i>
+                    <span className="text">Up from yesterday</span>
+                  </div>
                 </div>
+                <i className="bx bxs-cart-add cart two"></i>
               </div>
-              <i className="bx bxs-cart-add cart two"></i>
-            </div>
-            <div className="box">
-              <div className="right-side">
-                <div className="box-topic">Total Profit</div>
-                <div className="number">$12,876</div>
-                <div className="indicator">
-                  <i className="bx bx-up-arrow-alt"></i>
-                  <span className="text">Up from yesterday</span>
+              <div className="box">
+                <div className="right-side">
+                  <div className="box-topic">Total Products</div>
+                  <div className="number">{totalProduct}</div>
+                  <div className="indicator">
+                    <i className="bx bx-up-arrow-alt"></i>
+                    <span className="text">Up from yesterday</span>
+                  </div>
                 </div>
+                <i className="bx bx-cart cart three"></i>
               </div>
-              <i className="bx bx-cart cart three"></i>
-            </div>
-            <div className="box">
-              <div className="right-side">
-                <div className="box-topic">Total Return</div>
-                <div className="number">11,086</div>
-                <div className="indicator">
-                  <i className="bx bx-down-arrow-alt down"></i>
-                  <span className="text">Down From Today</span>
+              <div className="box">
+                <div className="right-side">
+                  <div className="box-topic">Total Delivary</div>
+                  <div className="number">{totalDelivary}</div>
+                  <div className="indicator">
+                    <i className="bx bx-down-arrow-alt down"></i>
+                    <span className="text">Down From Today</span>
+                  </div>
                 </div>
+                <i className="bx bxs-cart-download cart four"></i>
               </div>
-              <i className="bx bxs-cart-download cart four"></i>
             </div>
-          </div>
+          )}
 
           <div className="sales-boxes">
             <div className="recent-sales box">
               <div className="title">Recent Sales</div>
-              <div className="sales-details">
-                <ul className="details">
-                  <li className="topic">Date</li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                  <li>
-                    <a href="#">02 Jan 2021</a>
-                  </li>
-                </ul>
-                <ul className="details">
-                  <li className="topic">Customer</li>
-                  <li>
-                    <a href="#">Alex Doe</a>
-                  </li>
-                  <li>
-                    <a href="#">David Mart</a>
-                  </li>
-                  <li>
-                    <a href="#">Roe Parter</a>
-                  </li>
-                  <li>
-                    <a href="#">Diana Penty</a>
-                  </li>
-                  <li>
-                    <a href="#">Martin Paw</a>
-                  </li>
-                  <li>
-                    <a href="#">Doe Alex</a>
-                  </li>
-                  <li>
-                    <a href="#">Aiana Lexa</a>
-                  </li>
-                  <li>
-                    <a href="#">Rexel Mags</a>
-                  </li>
-                  <li>
-                    <a href="#">Tiana Loths</a>
-                  </li>
-                </ul>
-                <ul className="details">
-                  <li className="topic">Sales</li>
-                  <li>
-                    <a href="#">Delivered</a>
-                  </li>
-                  <li>
-                    <a href="#">Pending</a>
-                  </li>
-                  <li>
-                    <a href="#">Returned</a>
-                  </li>
-                  <li>
-                    <a href="#">Delivered</a>
-                  </li>
-                  <li>
-                    <a href="#">Pending</a>
-                  </li>
-                  <li>
-                    <a href="#">Returned</a>
-                  </li>
-                  <li>
-                    <a href="#">Delivered</a>
-                  </li>
-                  <li>
-                    <a href="#">Pending</a>
-                  </li>
-                  <li>
-                    <a href="#">Delivered</a>
-                  </li>
-                </ul>
-                <ul className="details">
-                  <li className="topic">Total</li>
-                  <li>
-                    <a href="#">$204.98</a>
-                  </li>
-                  <li>
-                    <a href="#">$24.55</a>
-                  </li>
-                  <li>
-                    <a href="#">$25.88</a>
-                  </li>
-                  <li>
-                    <a href="#">$170.66</a>
-                  </li>
-                  <li>
-                    <a href="#">$56.56</a>
-                  </li>
-                  <li>
-                    <a href="#">$44.95</a>
-                  </li>
-                  <li>
-                    <a href="#">$67.33</a>
-                  </li>
-                  <li>
-                    <a href="#">$23.53</a>
-                  </li>
-                  <li>
-                    <a href="#">$46.52</a>
-                  </li>
-                </ul>
-              </div>
+              <Table hover variant="light" borderless>
+                <thead>
+                  <tr>
+                    <th>Date </th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orderLoading
+                    ? ""
+                    : orderHere?.map((value) => {
+                        return (
+                          <tr key={value.orders._id}>
+                            <td>{value.updatedAt}</td>
+                            <td>{value.email}</td>
+                            <td>{value.orders.orderStatus}</td>
+                            {value.orders.isPaid ? (
+                              <td style={{color:'green'}} >{value.orders.amount}</td>
+                            ) : (
+                              <td style={{color:'red'}} >{value.orders.amount}</td>
+                            )}
+                          </tr>
+                        );
+                      })}
+                </tbody>
+              </Table>
               <div className="button">
-                <a href="#">See All</a>
+                <Link to='/orders'>See All</Link>
               </div>
             </div>
             <div className="top-sales box">
