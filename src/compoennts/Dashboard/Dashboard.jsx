@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import Sibebar from "../adminRoutes/Sibebar";
 import {useDispatch} from 'react-redux'
 import { fetchUser } from "../../REDUX/GET USER/userAction";
+import { fetchDashboardCount } from "../../REDUX/admin/adminAction";
 function Dashboard() {
 const dispatch = useDispatch()
 
   useEffect(()=>{
 
     dispatch(fetchUser())
+    dispatch(fetchDashboardCount())
     
     },[])
   return (

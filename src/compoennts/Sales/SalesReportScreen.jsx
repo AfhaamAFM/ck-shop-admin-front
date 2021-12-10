@@ -2,8 +2,9 @@ import React,{useState,useEffect} from 'react'
 import { Container, Row, Col, Form,Table,Button } from 'react-bootstrap'
 import DataTable from 'react-data-table-component';
 import {useSelector,useDispatch} from 'react-redux'
-import { fetchSalesReportType } from '../../REDUX/ORDERSTORE/orderAction';
+import { fetchSalesReportRange, fetchSalesReportType } from '../../REDUX/ORDERSTORE/orderAction';
 import Loader from 'react-loader-spinner';
+import axios from 'axios';
 
 function SalesReportScreen() {
 
@@ -13,7 +14,7 @@ const{report,loading:reportLoading}=useSelector(state=>state.sales)
 const dispatch = useDispatch()
 const[fromDate,setFromDate]=useState()
 const[toDate,setToDate]=useState()
-
+const[dateWarning,setDateWarning]=useState()
 
 // local function
 function typeFetchHandler(e){
@@ -23,12 +24,22 @@ setSalesReport(report)
 }
 
 // 
-const reportHandler=()=>{
+const reportHandler= async ()=>{
 
 try {
-    console.log('from'+new Date(fromDate),'TO'+new Date(toDate))
 
+if(!fromDate||!toDate){
+    return setDateWarning('Fill all')
 
+}
+
+const now =new Date()
+if(toDate>now){
+
+ return setDateWarning('Future Report is not available,select valid date')
+}
+
+   dispatch(fetchSalesReportRange())
 
 } catch (error) {
     
@@ -80,7 +91,10 @@ setSalesReport(report)
                             setToDate(e.target.value);                        }}
                         />
                     </Form.Group>
-                    <Col><Button onClick={reportHandler} >Search</Button></Col>
+                    <Col><Button onClick={reportHandler} >Search</Button> 
+                    <p style={{color:'red'}}>{dateWarning}</p>
+                    
+                      </Col>
                 </Row>
                 {/* Table start */}
               { reportLoading?  <Loader
