@@ -1,4 +1,8 @@
 import { OFFER_ADD_SUCCESS, OFFER_FETCH_SUCCESS, OFFER_FETCH_ERROR, OFFER_FETCH_REQUEST } from './offerType'
+import { COUPEN_ADD_SUCCESS, COUPEN_FETCH_SUCCESS, COUPEN_FETCH_ERROR, COUPEN_FETCH_REQUEST } from './offerType'
+
+
+
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
@@ -105,3 +109,53 @@ return (dispatch)=>{
 
 
 }}
+
+
+// FETCH COUPEN
+
+
+// type action
+
+
+export const fetchCoupenSuccess = (coupen) => {
+
+    return {
+
+        type: COUPEN_FETCH_SUCCESS,
+        payload: coupen
+    }
+}
+
+export const fetchCoupenError = (err) => {
+
+    return {
+        type: COUPEN_FETCH_ERROR,
+        payload: err
+
+
+    }
+
+}
+
+
+
+
+export const fetchCoupen=()=>{
+
+    
+    return (dispatch)=>{
+        dispatch({type:COUPEN_FETCH_REQUEST})
+    
+        axios.get('/offer/coupen/').then(res=>{
+        dispatch(fetchCoupenSuccess(res.data))
+    
+    
+        }).catch(err=>{
+    
+    
+            dispatch(fetchCoupenError(err))
+        })
+    
+    
+    
+    }}
