@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Table, Col, Button, Tab, Tabs } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Table,
+  Col,
+  Button,
+  Tab,
+  Tabs,
+  Badge,
+} from "react-bootstrap";
 import Sibebar from "../../adminRoutes/Sibebar";
 import Loader from "react-loader-spinner";
 
@@ -14,6 +23,7 @@ import OfferModal from "./OfferModal";
 import format from "../../../simple-react-form-validation-helper/utilFunctions";
 import Swal from "sweetalert2";
 import { fetchProduct } from "../../../REDUX/PRODUCTS/productAction";
+import { fetchOffers } from "../../../REDUX/OFFER/offerAction";
 
 function CategoryManage() {
   const [categoryName, setCategory] = useState("");
@@ -36,6 +46,7 @@ function CategoryManage() {
   const [expiryDate, setExpiryDate] = useState();
   const [offerId, setOfferId] = useState();
   const [warning, setWarning] = useState();
+  const [categoryId, setCategoryId] = useState();
   // offer modal states
 
   const dispatch = useDispatch();
@@ -49,6 +60,22 @@ function CategoryManage() {
   };
 
   // modal handler
+
+  function seeOfferHandler(e) {
+    const id = e.target.id;
+    setCategoryId(id);
+    setViewMode(true);
+    const thisCategory = category.find((value) => value.category === id);
+    const { offer } = thisCategory;
+
+    const { offerName, expiryDate, percentage } = offer;
+    setOfferName(offerName);
+    setPercentage(percentage);
+    setExpiryDate(format.dateFormatter(expiryDate));
+    console.log(offer);
+
+    offerHandleShow();
+  }
 
   const offerHandleClose = () => {
     setViewMode(false);
@@ -78,8 +105,7 @@ function CategoryManage() {
 
   const applyOfferHandler = (e) => {
     // const offerId = e.target.id;
-    
-console.log('OOKKKK '+offeredCategory);
+
     if (!offerId) return setWarning("Select a offer");
     axios
       .post("/offer/applyCategoryOffer", { offeredCategory, offerId })
@@ -96,6 +122,7 @@ console.log('OOKKKK '+offeredCategory);
             showConfirmButton: false,
             timer: 1500,
           });
+          dispatch(fetchCategory());
           dispatch(fetchProduct());
           return offerHandleClose();
         }
@@ -104,6 +131,36 @@ console.log('OOKKKK '+offeredCategory);
         console.error("this is apply offer arror  " + err);
       });
   };
+
+  function removeOfferHandler() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.get(`/offer/removeOffer/category/${categoryId}`).then((res) => {
+          if (res.data.response) {
+            Swal.fire(res.data.response);
+            dispatch(fetchProduct());
+            dispatch(fetchCategory());
+
+            return offerHandleClose();
+          }
+          if (res.data.warning) {
+            Swal.fire(res.data.warning);
+            // dispatch(fetchProduct());
+            return offerHandleClose();
+          }
+        });
+      }
+    });
+  }
+
   // offer modal end
 
   function editHandler() {
@@ -163,6 +220,7 @@ console.log('OOKKKK '+offeredCategory);
   }
 
   useEffect(() => {
+    dispatch(fetchOffers())
     dispatch(fetchCategory());
   }, [dispatch]);
 
@@ -184,6 +242,8 @@ console.log('OOKKKK '+offeredCategory);
             applyOfferHandler={applyOfferHandler}
             offerId={offerId}
             expiryDate={expiryDate}
+            category={category}
+            removeOfferHandler={removeOfferHandler}
           />
           <CategoryEditModal
             setNewCategory={setNewCategory}
@@ -197,7 +257,7 @@ console.log('OOKKKK '+offeredCategory);
             // offerName,offerId,date,discount applyOfferHandler,removeOfferHandler,showOfferHandler,offers
           />
           <Tabs
-            defaultActiveKey="profile"
+            defaultActiveKey="Category"
             id="uncontrolled-tab-example"
             className="mb-3"
           >
@@ -229,7 +289,23 @@ console.log('OOKKKK '+offeredCategory);
                             return (
                               <tr key={category._id}>
                                 <td>{i + 1}</td>
-                                <td>{category.category}</td>
+                                {!category.isOffer ? (
+                                  <td> {category.category}</td>
+                                ) : (
+                                  <td>
+                                    {" "}
+                                    {category.category}{" "}
+                                    <Badge
+                                      style={{ cursor: "pointer" }}
+                                      className="me-auto"
+                                      bg="success"
+                                      id={category.category}
+                                      onClick={seeOfferHandler}
+                                    >
+                                      Show offer
+                                    </Badge>
+                                  </td>
+                                )}
                                 <td>{category?.subCat.length}</td>
                                 <td>
                                   <div className="table-icons">

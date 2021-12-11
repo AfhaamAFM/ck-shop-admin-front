@@ -4,7 +4,7 @@ import  {Modal,ListGroup,Placeholder,Form,Button} from 'react-bootstrap'
 
 
 
-function OfferModal({offerName,expiryDate,percentage,offerShow,offerHandleClose,viewMode,applyOfferHandler,removeOfferHandler,offerId,showOfferHandler,offers}) {
+function OfferModal({offerName,expiryDate,percentage,offerShow,offerHandleClose,viewMode,applyOfferHandler,removeOfferHandler,offerId,showOfferHandler,offers,category}) {
     return (
         <Modal
         show={offerShow}

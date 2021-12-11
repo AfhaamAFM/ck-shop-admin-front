@@ -19,12 +19,12 @@ function OfferScreen() {
 
 <OfferViewScreen/>
   </Tab>
-  {/* <Tab eventKey="Address" title="Address">
-   <UserAdressScreen users={users} /> 
+  <Tab eventKey="Coupen" title="coupens">
+   {/* <UserAdressScreen users={users} />  */}
   </Tab>
-  <Tab eventKey="contact" title="My Orders" >
+  {/* <Tab eventKey="contact" title="My Orders" >
     <MyordersScreen />
-  </Tab> */}
+  </Tab>  */}
 </Tabs>
 </Row>
 

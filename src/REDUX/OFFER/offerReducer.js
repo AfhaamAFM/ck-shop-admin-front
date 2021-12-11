@@ -11,7 +11,7 @@ const initial = {
  
 }
 
-const offerReducer = (state = initial, action) => {
+export const offerReducer = (state = initial, action) => {
 
 
     switch (action.type) {
@@ -48,4 +48,4 @@ const offerReducer = (state = initial, action) => {
     }
 
 }
-    export default offerReducer
+    

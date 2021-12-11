@@ -2,9 +2,8 @@ import { combineReducers } from "redux";
 import userReducer from "./GET USER/userReducer";
 import categoryReducer from "./category/categoryReducer";
 import productReducer from "./PRODUCTS/productReducer";
-import offerReducer from "./OFFER/offerReducer";
-import { orderReducer } from "./ORDERSTORE/orderReducer";
-import {salesReducer} from "./ORDERSTORE/orderReducer";
+import {offerReducer} from "./OFFER/offerReducer";
+import { orderReducer, salesReducer } from "./ORDERSTORE/orderReducer";
 import  {adminReducer,  dashboardReducer } from "./admin/adminReducer";
 // import { adminReducer} from "./admin/adminReducer";
 

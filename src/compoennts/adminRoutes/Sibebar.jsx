@@ -35,7 +35,7 @@ function Sibebar() {
           <i className="bx bxl-c-plus-plus"></i>
           <span className="logo_name">CK SHOP ADMIN</span>
         </div>
-        <ul id='navLinks' className="nav-links">
+        <ul id="navLinks" className="nav-links">
           <li>
             <Link to="/dashboard">
               <i className="bx bx-grid-alt"></i>
@@ -43,33 +43,32 @@ function Sibebar() {
             </Link>
           </li>
           <li>
-            <Link to='/category'>
+            <Link to="/category">
               <i className="bx bx-coin-stack"></i>
               <span className="links_name">Category</span>
             </Link>
           </li>
           <li>
-            <Link to='/product'>
+            <Link to="/product">
               <i className="bx bx-box"></i>
               <span className="links_name">Products</span>
             </Link>
           </li>
           <li>
-            <Link to='/orders'>
+            <Link to="/orders">
               <i className="bx bx-box"></i>
               <span className="links_name">Orders</span>
             </Link>
           </li>
           <li>
-
-            <Link to='/offers'>
-              <i className="bx bx-box"></i>
-              <span className="links_name">Offers</span>
+            <Link to="/offers">
+              <i className="fas fa-percent"></i>{" "}
+              <span className="links_name">Offers{' & '}coupen</span>
             </Link>
           </li>
-         
+
           <li>
-            <Link to='/sales'>
+            <Link to="/sales">
               <i class="fas fa-balance-scale-left"></i>
               <span className="links_name">Sales</span>
             </Link>
@@ -80,7 +79,7 @@ function Sibebar() {
               <span className="links_name">Analytics</span>
             </a>
           </li> */}
-          
+
           {/* <li>
             <a href="#">
               <i className="bx bx-book-alt"></i>
@@ -116,26 +115,32 @@ function Sibebar() {
           </Button>
         </ul>
       </div>
-      <nav className='header'>
-      <Navbar bg="light" expand="lg">
-            <Container>
-              <Navbar.Brand href="#home"></Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#link">Link</Nav.Link>
-                  <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-                  </Navbar>
+      <nav className="header">
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <Navbar.Brand href="#home"></Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="#link">Link</Nav.Link>
+                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    Something
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    Separated link
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </nav>
     </div>
   );
