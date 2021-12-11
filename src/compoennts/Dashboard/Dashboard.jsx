@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../REDUX/GET USER/userAction";
 import { fetchDashboardCount } from "../../REDUX/admin/adminAction";
 import Loader from "react-loader-spinner";
-import { Table } from "react-bootstrap";
+import { Table, Row, Col } from "react-bootstrap";
 import { fetchOrders } from "../../REDUX/ORDERSTORE/orderAction";
-import {Link} from 'react-router-dom'
-
+import { Link } from "react-router-dom";
+import {PieChart} from "./ChartJs/PieChart";
+// import PieChart from "./ChartJs/PieChart";
 
 function Dashboard() {
   const [totalSales, setTotalSales] = useState();
@@ -127,9 +128,13 @@ function Dashboard() {
                             <td>{value.email}</td>
                             <td>{value.orders.orderStatus}</td>
                             {value.orders.isPaid ? (
-                              <td style={{color:'green'}} >{value.orders.amount}</td>
+                              <td style={{ color: "green" }}>
+                                {value.orders.amount}
+                              </td>
                             ) : (
-                              <td style={{color:'red'}} >{value.orders.amount}</td>
+                              <td style={{ color: "red" }}>
+                                {value.orders.amount}
+                              </td>
                             )}
                           </tr>
                         );
@@ -137,7 +142,7 @@ function Dashboard() {
                 </tbody>
               </Table>
               <div className="button">
-                <Link to='/orders'>See All</Link>
+                <Link to="/orders">See All</Link>
               </div>
             </div>
             <div className="top-sales box">
@@ -202,6 +207,13 @@ function Dashboard() {
               </ul>
             </div>
           </div>
+
+          <Row className="sales-boxes ">
+            <Col  className="recent-sales box my-4">
+              <PieChart type={'pie'} />
+            </Col >
+            <Col  className="top-sales box my-4"></Col >
+          </Row>
         </div>
       </section>
     </>

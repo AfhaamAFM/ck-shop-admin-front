@@ -61,6 +61,7 @@ function ImageEditModal({editImageShow,
       <Form.Group className="position-relative mb-3">
             <Form.Label>File</Form.Label>
             <Form.Control
+            accept='image/*'
               type="file"
               required
               name="file"
