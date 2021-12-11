@@ -210,7 +210,7 @@ function Dashboard() {
 
           <Row className="sales-boxes ">
             <Col  className="recent-sales box my-4">
-              <PieChart type={'pie'} />
+              <PieChart type='pie' />
             </Col >
             <Col  className="top-sales box my-4"></Col >
           </Row>

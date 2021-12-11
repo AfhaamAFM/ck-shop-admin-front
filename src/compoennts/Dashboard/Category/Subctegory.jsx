@@ -6,6 +6,7 @@ import { fetchCategory } from "../../../REDUX/category/categoryAction";
 import axios from 'axios'
 import swal from 'sweetalert'
 import EditsubCategoryModal from "./EditsubCategoryModal";
+import OfferModal from "./OfferModal";
 // import { Container, Row, Table, Col, Button, Tab ,Tabs} from 'react-bootstrap'
 // import SubcategoryTable from '../../Tables/Product'
 
@@ -23,8 +24,7 @@ function Subctegory() {
 const[subCat,setSubCat]=useState('')
 const [show, setShow] = useState(false);
 const[currentData,setCurrentData]=useState('')
-
-let oldsubCat
+// offer handshow
 
 
 // Modal function start
@@ -45,7 +45,6 @@ const handleShow = (e) => {
 // sub category edit handler start
 const editHandler =(e) =>{
 
-  console.log(oldsubCat)
   console.log(_id)
 axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
 
@@ -160,13 +159,21 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
 
     }) }
 
+// offer show function and controller
+
+
+
+
+
+
+
+
     useEffect(()=>{
 
       dispatch(fetchCategory())
     },[dispatch,selectedCategory])
   return (
     <div>
-
 
 
       <EditsubCategoryModal setNewSubCat={setNewSubCat} newsubCat={newsubCat} show={show} handleClose={handleClose} editHandler={editHandler} 
@@ -232,6 +239,7 @@ axios.post('/admin/category/sub/edit/',{_id,subCat,newsubCat}).then((res)=>{
                       <div className='table-icons'>
                         <i className="fas fa-trash-alt" id={value}  onClick={deleteHandler}></i>
                         <i className="fas fa-edit" id={value} onClick={handleShow} ></i>
+
                       </div>
                     </td>
                    
