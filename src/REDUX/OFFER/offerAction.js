@@ -162,12 +162,12 @@ export const fetchCoupen=()=>{
 
 
 
-export const addCoupen=(name,expiryDate,percentage)=>{
+export const addCoupen=(name,expiryDate,percentage,minAmount)=>{
     return (dispatch)=>{
     
         dispatch({type:COUPEN_FETCH_REQUEST})
     
-    axios.post('/offer/addCoupen',{name,expiryDate,percentage}).then((res)=>{
+    axios.post('/offer/addCoupen',{name,expiryDate,percentage,minAmount}).then((res)=>{
     
     
     

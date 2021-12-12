@@ -69,7 +69,7 @@ function Sibebar() {
 
           <li>
             <Link to="/sales">
-              <i class="fas fa-balance-scale-left"></i>
+              <i className="fas fa-balance-scale-left"></i>
               <span className="links_name">Sales</span>
             </Link>
           </li>

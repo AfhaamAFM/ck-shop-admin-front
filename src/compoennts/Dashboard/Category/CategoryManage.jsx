@@ -203,7 +203,7 @@ function CategoryManage() {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .get(`http://localhost:5000/admin/category/delete/${id}`)
+          .get(`/admin/category/delete/${id}`)
           .then((res) => {
             if (res.data) {
               dispatch(fetchCategory());

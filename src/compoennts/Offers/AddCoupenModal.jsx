@@ -19,7 +19,10 @@ function AddCoupenModal({
     expiryDateError,
     percentageError,
     addCoupenHandler,
-    loading
+    loading,
+    setMinAmount,
+    minAmountError,
+    setMinAmountError
 
 }) {
 
@@ -31,8 +34,6 @@ function AddCoupenModal({
 
             <Modal
                 show={addshow}
-                onHide={addHandleClose}
-                backdrop="static"
                 keyboard={false}
 
             >
@@ -63,6 +64,26 @@ function AddCoupenModal({
                                 {coupenNameError}
                             </Form.Text>
                         </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicDate">
+                            <Form.Label>Minimum Amount</Form.Label>
+                            <Form.Control type="text" placeholder="Enter minumum amount"
+
+                                onChange={(e) => {
+                                    validator.priceInputChangeHandler(e.target.value,setMinAmountError)
+                                    setMinAmount(e.target.value);
+
+                                }}
+                                onBlur={(e)=>{validator.priceInputBlurHandler(e.target.value,setMinAmountError)}}
+
+                            />
+
+                            <Form.Text className="text-muted" style={{ color: 'red' }} >
+                                {minAmountError}
+                            </Form.Text>
+                        </Form.Group>
+
+
 
                         <Form.Group className="mb-3" controlId="formBasicDate">
                             <Form.Label>Expiry Date</Form.Label>
