@@ -79,7 +79,6 @@ export const coupenReducer = (state = initialCoupen, action) => {
         case COUPEN_ADD_SUCCESS:
             return {
                 ...state,
-                addResponse: action.payload,
                 loading: false,
                 error: ''
             }

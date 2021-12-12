@@ -1,37 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Table, Container } from 'react-bootstrap'
 import { Space } from 'antd'
-import AddOfferModal from './AddOfferModal';
 import { useSelector, useDispatch } from 'react-redux'
-import { addOffer, fetchOffers } from '../../REDUX/OFFER/offerAction';
-import Swal from 'sweetalert2'
+import { addCoupen ,fetchCoupen} from '../../REDUX/OFFER/offerAction';
 import Loader from 'react-loader-spinner';
+import AddCoupenModal from './AddCoupenModal';
 
 
 
 
-function OfferViewScreen() {
+function CoupenViewScreen() {
 
     // use states
     const [addshow, setAddShow] = useState(false); //usestate for edit modal
     // modals forms
-    const [offerName, setOfferName] = useState('.')
+    const [coupenName, setCoupenName] = useState('.')
     const [expiryDate, setExpiryDate] = useState('.')
     const [percentage, setPercentage] = useState('.')
 
     // modal form error
-    const [offerNameError, setOfferNameError] = useState('.')
+    const [coupenNameError, setCoupenNameError] = useState('.')
     const [expiryDateError, setExpiryDateError] = useState('.')
     const [percentageError, setPercentageError] = useState('.')
 
-    console.log(offerName, expiryDate, percentage);
     //   modal controller function 
     const addHandleClose = () => setAddShow(false);
     const addHandleShow = () => setAddShow(true);
 
 
     //  redux
-    const { offers,loading } = useSelector(state => state.offer)
+    const { coupen,loading } = useSelector(state => state.coupen)
     const dispatch = useDispatch()
 
     // Add offer function 
@@ -39,9 +37,9 @@ function OfferViewScreen() {
 
    
 
-    function addOfferHandler() {
+    function addCoupenHandler() {
 
-        if (!offerName || !expiryDate || !percentage) {
+        if (!coupenName || !expiryDate || !percentage) {
             return setPercentageError('Fill all')
 
         }
@@ -53,9 +51,12 @@ function OfferViewScreen() {
             return setExpiryDateError('Enter a valid Error')
         }
 
-        dispatch(addOffer(offerName, expiryDate, percentage))
+        dispatch(addCoupen(coupenName, expiryDate, percentage))
         addHandleClose()
+        setCoupenName('.')
+        setExpiryDate('.')
 
+        setPercentage('.')
     }
 
 
@@ -63,7 +64,7 @@ function OfferViewScreen() {
 
     useEffect(() => {
 
-        dispatch(fetchOffers())
+        dispatch(fetchCoupen())
 
     }, [dispatch])
 
@@ -77,30 +78,29 @@ function OfferViewScreen() {
             <Container>
                 <Row className='d-flex' >
                     {/* Modalss start */}
-                    <AddOfferModal
+                    <AddCoupenModal
                         addHandleClose={addHandleClose}
                         addshow={addshow}
-                        offerName={offerName}
+                        coupenName={coupenName}
                         expiryDate={expiryDate}
                         percentage={percentage}
-                        offerNameError={offerNameError}
+                        couponNameError={coupenNameError}
                         expiryDateError={expiryDateError}
                         percentageError={percentageError}
-                        setOfferName={setOfferName}
+                        setCoupenName={setCoupenName}
                         setExpiryDate={setExpiryDate}
                         setPercentage={setPercentage}
-                        setOfferNameError={setOfferNameError}
+                        setCoupenNameError={setCoupenNameError}
                         setExpiryDateError={setExpiryDateError}
                         setPercentageError={setPercentageError}
-                        addOfferHandler={addOfferHandler}
-                        addOfferHandler={addOfferHandler}
+                        addCoupenHandler={addCoupenHandler}
                         loading={loading}
                     />
                     {/* MOdals ens */}
                     <Col>
                         <Row className='d-flex' className=''>
                             <Space direction='horizontal'>
-                                <h2 as={Col} md={8}>User details</h2>
+                                <h2 as={Col} md={8}>Coupen Details</h2>
                                 <h2 as={Col} md={4} className='buttonIcons mx-3' onClick={addHandleShow} ><i className="fas fa-plus-square"></i> </h2>
                             </Space>
                         </Row>
@@ -114,7 +114,7 @@ function OfferViewScreen() {
   <thead>
     <tr>
       <th>#</th>
-      <th>Offer Name</th>
+      <th>Coupen Name</th>
       <th>Discount (%)</th>
       <th>Start Date</th>
       <th>Expiry Date</th>
@@ -122,7 +122,7 @@ function OfferViewScreen() {
   </thead>
   <tbody>
       <>
-      {!offers?
+      {!coupen?
         <Loader
         type="Puff"
         color="#00BFFF"
@@ -133,10 +133,10 @@ function OfferViewScreen() {
      
       
      <>
-     {offers.map((value,i)=>{
+     {coupen.map((value,i)=>{
   return  <tr key={value._id} >
       <td>{i+1}</td>
-      <td>{value.offerName}</td>
+      <td>{value.name}</td>
       <td>{value.percentage} %</td>
       <td>{value.createdAt}</td>
       <td>{(value.expiryDate)}</td>
@@ -154,4 +154,4 @@ function OfferViewScreen() {
     )
 }
 
-export default OfferViewScreen
+export default CoupenViewScreen

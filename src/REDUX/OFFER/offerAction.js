@@ -159,3 +159,45 @@ export const fetchCoupen=()=>{
     
     
     }}
+
+
+
+export const addCoupen=(name,expiryDate,percentage)=>{
+    return (dispatch)=>{
+    
+        dispatch({type:COUPEN_FETCH_REQUEST})
+    
+    axios.post('/offer/addCoupen',{name,expiryDate,percentage}).then((res)=>{
+    
+    
+    
+    if(res.data.warning){
+        fetchCoupenError(res.data.warning)
+        return Swal.fire(res.data.warning)
+    }
+    if(res.data){
+        dispatch({type:COUPEN_ADD_SUCCESS})
+        dispatch(fetchCoupen())
+       return  Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Offer Added',
+            showConfirmButton: false,
+            timer: 1500
+          })
+    
+    
+         
+    }
+    
+    }).catch(err=>{
+    dispatch(fetchOfferError(err))
+    
+    
+    })
+    
+    
+    }}
+    
+    
+    

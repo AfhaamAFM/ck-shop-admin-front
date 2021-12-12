@@ -1,6 +1,7 @@
 import React from 'react'
 import {Container,Tabs,Tab,Row} from 'react-bootstrap'
 import Sibebar from '../adminRoutes/Sibebar'
+import CoupenViewScreen from './CoupenViewScreen'
 import OfferViewScreen from './OfferViewScreen'
 
 
@@ -20,7 +21,7 @@ function OfferScreen() {
 <OfferViewScreen/>
   </Tab>
   <Tab eventKey="Coupen" title="coupens">
-   {/* <UserAdressScreen users={users} />  */}
+   <CoupenViewScreen /> 
   </Tab>
   {/* <Tab eventKey="contact" title="My Orders" >
     <MyordersScreen />

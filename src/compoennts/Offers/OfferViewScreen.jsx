@@ -93,7 +93,6 @@ function OfferViewScreen() {
                         setExpiryDateError={setExpiryDateError}
                         setPercentageError={setPercentageError}
                         addOfferHandler={addOfferHandler}
-                        addOfferHandler={addOfferHandler}
                         loading={loading}
                     />
                     {/* MOdals ens */}
