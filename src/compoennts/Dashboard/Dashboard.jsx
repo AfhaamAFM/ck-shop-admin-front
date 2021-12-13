@@ -7,7 +7,9 @@ import Loader from "react-loader-spinner";
 import { Table, Row, Col } from "react-bootstrap";
 import { fetchOrders } from "../../REDUX/ORDERSTORE/orderAction";
 import { Link } from "react-router-dom";
-import {PieChart} from "./ChartJs/PieChart";
+import LineChart from "./ChartJs/LineChart";
+import PieChart from "./ChartJs/PieChart";
+import axios from "axios";
 // import PieChart from "./ChartJs/PieChart";
 
 function Dashboard() {
@@ -16,6 +18,7 @@ function Dashboard() {
   const [totalDelivary, setTotalDelivary] = useState();
   const [totalProduct, setTotalProduct] = useState();
   const [orderHere, setOrderHere] = useState();
+
 
   const dispatch = useDispatch();
   const { countDetails, loading: countLoading } = useSelector(
@@ -29,7 +32,7 @@ function Dashboard() {
     dispatch(fetchOrders());
   }, [dispatch]);
 
-  useEffect(() => {
+  useEffect(async() => {
     if (!countDetails) return;
     setTotalSales(countDetails.totalSalesAmount);
     setTotalProduct(countDetails.totalProduct);
@@ -40,9 +43,9 @@ function Dashboard() {
 
     const extOrder = orders.splice(0, 10);
     setOrderHere(extOrder);
-  }, [dispatch, countDetails]);
 
-  console.log(orderHere);
+  }, [dispatch, countDetails,orders]);
+
   return (
     <>
       <Sibebar />
@@ -210,9 +213,15 @@ function Dashboard() {
 
           <Row className="sales-boxes ">
             <Col  className="recent-sales box my-4">
-              <PieChart type='pie' />
+            <Row> <h4> Weekly Sales </h4></Row>
+              <LineChart  />
+             
             </Col >
-            <Col  className="top-sales box my-4"></Col >
+            <Col  className="top-sales box my-4">
+            <Row> <h4> User Details</h4> </Row>
+
+            <PieChart/>
+            </Col >
           </Row>
         </div>
       </section>

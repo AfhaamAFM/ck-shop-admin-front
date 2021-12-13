@@ -123,7 +123,7 @@ setSalesReport(report)
         height={100}
         width={100}
       />:report.map((data,i)=>{
-      return<tr key={data.orders.orderId}>
+      return<tr key={i}>
       <td>{i+1}</td>
       <td>{data.email}</td>
       <td>{data.orders.orderId}</td>

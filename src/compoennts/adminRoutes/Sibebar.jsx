@@ -16,7 +16,7 @@ function Sibebar() {
 
   function logoutHandler() {
     axios
-      .get("http://localhost:5000/admin/logout")
+      .get("/admin/logout")
       .then((res) => {
         navigate("/");
       })

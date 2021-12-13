@@ -1,32 +1,31 @@
 import axios from 'axios';
 import React,{useEffect,useRef,useState} from 'react'
-import { useDispatch } from 'react-redux';
 
- function PieChart() {
+ function LineChart() {
+    const[weeklyData,setWeeklyData]=useState([])
 
-    const[userData,setUserData]=useState()
+
 const canvasRef= useRef(null)
 
-const loadData=async()=>{
-    const {data} =await axios.get('/admin/dashboard/chart')
-    setUserData(data.user)
-}
-
-useEffect(() => {
+useEffect(async() => {
+    const {data} =await axios.get('/admin/dashboard/chart') 
+    console.log('Hereee',data)
+    setWeeklyData(data.user)
+   //  setWeeklyData(data.sales)
    
-   loadData()
-     },[]);
-  console.log(userData)
+     }, []);
+   
+
 useEffect(async()=>{
 const ctx = canvasRef.current.getContext('2d')
 const {data} =await axios.get('/admin/dashboard/chart')
 const myChart = new window.Chart(ctx, {
-    type: 'pie',
+    type: 'line',
     data: {
-        labels: ['Blocked', 'Unblocked'],
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: '# of Votes',
-            data: data.user,
+            data: data.sales,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -45,6 +44,13 @@ const myChart = new window.Chart(ctx, {
             ],
             borderWidth: 1
         }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
     }
 });
 
@@ -59,10 +65,10 @@ return () => {
 
     return (
         <div>
-           <canvas ref={canvasRef}></canvas>
+           <canvas height='300' ref={canvasRef}></canvas>
  
         </div>
     )
 }
 
-export default PieChart;
+export default LineChart;
