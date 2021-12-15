@@ -6,7 +6,6 @@ import { fetchProduct } from "../../REDUX/PRODUCTS/productAction";
 import swal from 'sweetalert'
 import { fetchOffers } from "../../REDUX/OFFER/offerAction";
 import format from "../../simple-react-form-validation-helper1/utilFunctions";
-import { CropSquare } from "@mui/icons-material";
 import Swal from "sweetalert2";
 
 function ShowProductScreen() {

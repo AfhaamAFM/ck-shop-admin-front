@@ -6,7 +6,6 @@ import { fetchCategory } from "../../../REDUX/category/categoryAction";
 import axios from 'axios'
 import swal from 'sweetalert'
 import EditsubCategoryModal from "./EditsubCategoryModal";
-import OfferModal from "./OfferModal";
 // import { Container, Row, Table, Col, Button, Tab ,Tabs} from 'react-bootstrap'
 // import SubcategoryTable from '../../Tables/Product'
 
@@ -20,10 +19,10 @@ function Subctegory() {
   const { category: categoryData } = useSelector((state) => state.category);
   const [warning,setWarning] = useState('')
   const[newsubCat,setNewSubCat]=useState('')
-  const { product } = useSelector((state) => state.product);
+  // const { product } = useSelector((state) => state.product);
 const[subCat,setSubCat]=useState('')
 const [show, setShow] = useState(false);
-const[currentData,setCurrentData]=useState('')
+// const[currentData,setCurrentData]=useState('')
 // offer handshow
 
 

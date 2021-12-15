@@ -6,7 +6,6 @@ import { fetchCategory } from "../../REDUX/category/categoryAction";
 import swal from 'sweetalert';
 import validator from "../../simple-react-form-validation-helper1/validationHelpers";
 import ImageEditModal from "./ImageEditModal";
-import { logDOM } from "@testing-library/react";
 import { fetchProduct } from "../../REDUX/PRODUCTS/productAction";
 // import validator from '../../simple-react-form-validation-helper'
 
@@ -125,7 +124,7 @@ function AddProductScreen() {
 
         dispatch(fetchCategory())
 
-    }, [])
+    }, [dispatch])
 
     // category drop down start
 

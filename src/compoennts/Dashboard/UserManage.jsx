@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row, Table,Button,FormControl,InputGroup,Form } from 'react-bootstrap'
+import { Col, Container, Row, Table,Button,FormControl,InputGroup} from 'react-bootstrap'
 import Sibebar from '../adminRoutes/Sibebar'
 import { fetchUser } from '../../REDUX/GET USER/userAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +17,7 @@ const{pageNumber}=useParams()||1
     const dispatch = useDispatch()
     const[value,setKeyword]=useState('')
 const[show,setShow]=useState('')
-const {users,loading,page,pages}=useSelector(state=>state.user)
+const {users,page,pages}=useSelector(state=>state.user)
 
 
 

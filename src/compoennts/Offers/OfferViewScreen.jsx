@@ -4,7 +4,6 @@ import { Space } from 'antd'
 import AddOfferModal from './AddOfferModal';
 import { useSelector, useDispatch } from 'react-redux'
 import { addOffer, fetchOffers } from '../../REDUX/OFFER/offerAction';
-import Swal from 'sweetalert2'
 import Loader from 'react-loader-spinner';
 
 
@@ -99,8 +98,8 @@ function OfferViewScreen() {
                     <Col>
                         <Row className='d-flex' className=''>
                             <Space direction='horizontal'>
-                                <h2 as={Col} md={8}>User details</h2>
-                                <h2 as={Col} md={4} className='buttonIcons mx-3' onClick={addHandleShow} ><i className="fas fa-plus-square"></i> </h2>
+                                <h2 as={Col} id='2' md={8}>User details</h2>
+                                <h2 as={Col} id='4' md={4} className='buttonIcons mx-3' onClick={addHandleShow} ><i className="fas fa-plus-square"></i> </h2>
                             </Space>
                         </Row>
                     </Col>

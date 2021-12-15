@@ -1,13 +1,11 @@
 import axios from 'axios';
 import React,{useEffect,useRef,useState} from 'react'
-import { useDispatch } from 'react-redux';
 
  function PieChart() {
 
-    const[userData,setUserData]=useState()
 const canvasRef= useRef(null)
 
-  console.log(userData)
+// eslint-disable-next-line
 useEffect(async()=>{
 const ctx = canvasRef.current.getContext('2d')
 const {data} =await axios.get('/admin/dashboard/chart')

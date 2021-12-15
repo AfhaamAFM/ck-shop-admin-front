@@ -1,21 +1,13 @@
 import axios from 'axios';
-import React,{useEffect,useRef,useState} from 'react'
+import React,{useEffect,useRef} from 'react'
 
  function LineChart() {
-    const[weeklyData,setWeeklyData]=useState([])
 
 
 const canvasRef= useRef(null)
 
-useEffect(async() => {
-    const {data} =await axios.get('/admin/dashboard/chart') 
-    console.log('Hereee',data)
-    setWeeklyData(data.user)
-   //  setWeeklyData(data.sales)
    
-     }, []);
-   
-
+// eslint-disable-next-line
 useEffect(async()=>{
 const ctx = canvasRef.current.getContext('2d')
 const {data} =await axios.get('/admin/dashboard/chart')

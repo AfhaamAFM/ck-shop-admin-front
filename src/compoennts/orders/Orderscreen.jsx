@@ -18,7 +18,7 @@ function OrderScreen() {
 
   // useStates start\
 
-
+// eslint-disable-next-line
   const [orderStatus, setOrderStatus] = useState()
 
   // useState end

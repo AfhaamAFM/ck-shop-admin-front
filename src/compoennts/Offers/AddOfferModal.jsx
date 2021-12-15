@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button, Form, Row, Col,Spinner } from 'react-bootstrap'
+import { Modal, Button, Form, Row,Spinner } from 'react-bootstrap'
 import validator from '../../simple-react-form-validation-helper1/validationHelpers';
 
 

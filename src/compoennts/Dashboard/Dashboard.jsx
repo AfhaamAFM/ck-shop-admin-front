@@ -9,7 +9,6 @@ import { fetchOrders } from "../../REDUX/ORDERSTORE/orderAction";
 import { Link } from "react-router-dom";
 import LineChart from "./ChartJs/LineChart";
 import PieChart from "./ChartJs/PieChart";
-import axios from "axios";
 // import PieChart from "./ChartJs/PieChart";
 
 function Dashboard() {

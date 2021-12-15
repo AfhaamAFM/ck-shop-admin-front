@@ -1,6 +1,6 @@
 import React from 'react'
 import { Nav,Pagination} from 'react-bootstrap'
-import {Link,useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 
 

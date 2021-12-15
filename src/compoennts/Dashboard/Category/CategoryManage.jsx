@@ -28,7 +28,7 @@ import { fetchOffers } from "../../../REDUX/OFFER/offerAction";
 function CategoryManage() {
   const [categoryName, setCategory] = useState("");
   const { category, loading } = useSelector((state) => state.category);
-  const { loading: offerLoading, offers } = useSelector((state) => state.offer);
+  const {offers } = useSelector((state) => state.offer);
 
   const [show, setShow] = useState(false);
   const [newCategory, setNewCategory] = useState("");

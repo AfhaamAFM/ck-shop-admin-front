@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Button, FloatingLabel, Spinner,Image,Placeholder } from "react-bootstrap";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { fetchCategory } from "../../REDUX/category/categoryAction";
 import { fetchProduct } from "../../REDUX/PRODUCTS/productAction";
 import swal from 'sweetalert'
 import ImageEditModal from "./ImageEditModal";
-import Swal from "sweetalert2";
 
 
 
@@ -57,7 +56,6 @@ function EditProductScreen() {
     const [medium, setMedium] = useState(1);
     const [quantity, setQuantity] = useState(0);
     const [warning, setWarning] = useState("");
-    const [selectedFile, setSelectedFile] = useState([]);
     const [subcategory, setSubcategory] = useState();
     const { category: categoryData } = useSelector((state) => state.category);
     const { product } = useSelector(state => state.product)

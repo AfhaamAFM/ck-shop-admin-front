@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { adminlogged } from "../../REDUX/admin/adminAction";
 import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
@@ -12,7 +12,7 @@ function Sibebar() {
 
   useEffect(() => {
     dispatch(adminlogged());
-  }, []);
+  }, [dispatch]);
 
   function logoutHandler() {
     axios

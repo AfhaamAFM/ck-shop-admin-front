@@ -10,12 +10,6 @@ function Login() {
 
 
 
-    useEffect(()=>{
-
-        dispatch(adminlogged())
-        
-        
-        },[])
 
 
 const dispatch =useDispatch()
@@ -49,6 +43,14 @@ dispatch(adminlogged())
 })
 
 }
+
+
+useEffect(()=>{
+
+    dispatch(adminlogged())
+    
+    
+    },[dispatch])
 
 
     return (

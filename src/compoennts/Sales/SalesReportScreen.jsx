@@ -1,10 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import { Container, Row, Col, Form,Table,Button } from 'react-bootstrap'
-import DataTable from 'react-data-table-component';
 import {useSelector,useDispatch} from 'react-redux'
 import { fetchSalesReportRange, fetchSalesReportType } from '../../REDUX/ORDERSTORE/orderAction';
 import Loader from 'react-loader-spinner';
-import axios from 'axios';
 
 function SalesReportScreen() {
 
@@ -50,12 +48,12 @@ if(toDate>now){
 
 
 
-useEffect(async()=>{
+useEffect(()=>{
 dispatch(fetchSalesReportType(reportType))
 setSalesReport(report)
 
-
-},[])
+// eslint-disable-next-line
+},[dispatch])
 
     return (
         <>
