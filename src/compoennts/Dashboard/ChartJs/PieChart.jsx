@@ -7,15 +7,6 @@ import { useDispatch } from 'react-redux';
     const[userData,setUserData]=useState()
 const canvasRef= useRef(null)
 
-const loadData=async()=>{
-    const {data} =await axios.get('/admin/dashboard/chart')
-    setUserData(data.user)
-}
-
-useEffect(() => {
-   
-   loadData()
-     },[]);
   console.log(userData)
 useEffect(async()=>{
 const ctx = canvasRef.current.getContext('2d')

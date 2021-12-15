@@ -22,7 +22,7 @@ const {data} =await axios.get('/admin/dashboard/chart')
 const myChart = new window.Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Monday', 'Tuesday', 'Wendsday', 'Thursday', 'Friday', 'Saturday'],
         datasets: [{
             label: '# of Votes',
             data: data.sales,

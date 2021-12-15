@@ -148,7 +148,7 @@ function Dashboard() {
                 <Link to="/orders">See All</Link>
               </div>
             </div>
-            <div className="top-sales box">
+            {/* <div className="top-sales box">
               <div className="title">Top Seling Product</div>
               <ul className="top-sales-details">
                 <li>
@@ -208,7 +208,7 @@ function Dashboard() {
                   <span className="price">$1245</span>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
 
           <Row className="sales-boxes ">
