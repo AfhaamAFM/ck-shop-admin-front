@@ -15,6 +15,7 @@ function ShowProductScreen() {
     const [discount, setPercentage] = useState()
     const [date, setExpiryDate] = useState()
     const [offerId, setOfferId] = useState()
+    // eslint-disable-next-line 
     const [warning, setWarning] = useState()
     const [viewMode, setViewMode] = useState(false)
 
@@ -30,7 +31,7 @@ function ShowProductScreen() {
 
     // redux controller
     const { product } = useSelector((state) => state.product);
-    const { loading, offers } = useSelector(state => state.offer)
+    const { offers } = useSelector(state => state.offer)
     const dispatch = useDispatch();
 
 
@@ -123,7 +124,7 @@ function ShowProductScreen() {
         setViewMode(true)
         const thisProduct = product.find(value => value._id === id)
         const { offer } = thisProduct
-
+// eslint-disable-next-line 
         const { offerId, offerName, expiryDate, percentage } = offer
         setOfferName(offerName)
         setPercentage(percentage)

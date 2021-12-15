@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner';
 function SalesReportScreen() {
 
 const[reportType,setReportType]=useState('Monthly')
+// eslint-disable-next-line 
 const[salesReport,setSalesReport]=useState()
 const{report,loading:reportLoading}=useSelector(state=>state.sales)
 const dispatch = useDispatch()

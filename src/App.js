@@ -4,7 +4,7 @@ import store from './REDUX/store';
 import {Provider} from 'react-redux'
 import axios  from 'axios';
 // const myUrl= ''
-axios.defaults.baseURL='http://localhost:5000'
+axios.defaults.baseURL='https://server.afhaam.tech'
  axios.defaults.withCredentials=true
 
 function App() {

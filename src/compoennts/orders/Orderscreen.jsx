@@ -28,7 +28,7 @@ function OrderScreen() {
   const editHandleClose = () => setEditShow(false);
   const editHandleShow = () => setEditShow(true);
 
-
+// eslint-disable-next-line 
   let [searchParams, setSearchParams] = useSearchParams();
   let user = searchParams.get("user");
   let orderId = searchParams.get("orderId");

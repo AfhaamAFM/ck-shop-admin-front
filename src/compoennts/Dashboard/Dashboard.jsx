@@ -31,6 +31,7 @@ function Dashboard() {
     dispatch(fetchOrders());
   }, [dispatch]);
 
+  // eslint-disable-next-line
   useEffect(async() => {
     if (!countDetails) return;
     setTotalSales(countDetails.totalSalesAmount);

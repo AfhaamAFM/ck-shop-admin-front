@@ -96,7 +96,7 @@ function OfferViewScreen() {
                     />
                     {/* MOdals ens */}
                     <Col>
-                        <Row className='d-flex' className=''>
+                        <Row className='d-flex' >
                             <Space direction='horizontal'>
                                 <h2 as={Col} id='2' md={8}>User details</h2>
                                 <h2 as={Col} id='4' md={4} className='buttonIcons mx-3' onClick={addHandleShow} ><i className="fas fa-plus-square"></i> </h2>
