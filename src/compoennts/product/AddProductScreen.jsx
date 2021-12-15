@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCategory } from "../../REDUX/category/categoryAction";
 import swal from 'sweetalert';
-import validator from "../../simple-react-form-validation-helper/validationHelpers";
+import validator from "../../simple-react-form-validation-helper1/validationHelpers";
 import ImageEditModal from "./ImageEditModal";
 import { logDOM } from "@testing-library/react";
 import { fetchProduct } from "../../REDUX/PRODUCTS/productAction";

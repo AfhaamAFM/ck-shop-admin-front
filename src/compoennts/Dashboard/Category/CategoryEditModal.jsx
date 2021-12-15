@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal,Form } from "react-bootstrap";
-import validator from "../../../simple-react-form-validation-helper/validationHelpers";
+import validator from "../../../simple-react-form-validation-helper1/validationHelpers";
 
 function CategoryEditModal({oldCategory, nameError, setError, handleClose,setNewCategory,show ,editHandler,newCategory}) {
 

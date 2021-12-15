@@ -20,7 +20,7 @@ import Subctegory from "../Category/Subctegory";
 
 import CategoryEditModal from "./CategoryEditModal";
 import OfferModal from "./OfferModal";
-import format from "../../../simple-react-form-validation-helper/utilFunctions";
+import format from "../../../simple-react-form-validation-helper1/utilFunctions";
 import Swal from "sweetalert2";
 import { fetchProduct } from "../../../REDUX/PRODUCTS/productAction";
 import { fetchOffers } from "../../../REDUX/OFFER/offerAction";
