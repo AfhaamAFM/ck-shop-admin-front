@@ -4,14 +4,13 @@ import store from './REDUX/store';
 import {Provider} from 'react-redux'
 import axios  from 'axios';
 // const myUrl= ''
-axios.defaults.baseURL='http://localhost:5000'
+axios.defaults.baseURL='/api'
  axios.defaults.withCredentials=true
-
+// /api changed everthing
 function App() {
   return (
     <div className="App">
     <Provider store ={store}>
-
       <Adminroutes/>
     </Provider>
     </div>
