@@ -27,10 +27,7 @@ function Sibebar() {
 
   return (
     <div>
-      <div
-        className="sidebar"
-        // {active?'sidebar active':'sidebar'}
-      >
+      <div className="sidebar">
         <div className="logo-details">
           <i className="bx bxl-c-plus-plus"></i>
           <span className="logo_name">CK SHOP ADMIN</span>
