@@ -238,7 +238,7 @@ nav .profile-details i{
 }
 .home-section .home-content{
   position: relative;
-  padding-top: 104px;
+  padding-top: 1rem;
 }
 .home-content .overview-boxes{
   display: flex;
@@ -325,7 +325,7 @@ nav .profile-details i{
 
 /* left box */
 .home-content .sales-boxes .recent-sales{
-  width: 65%;
+ 
   background: #fff;
   padding: 20px 30px;
   margin: 0 20px;

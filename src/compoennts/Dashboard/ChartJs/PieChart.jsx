@@ -9,6 +9,7 @@ const canvasRef= useRef(null)
 useEffect(async()=>{
 const ctx = canvasRef.current.getContext('2d')
 const {data} =await axios.get('/admin/dashboard/chart')
+console.log(data)
 const myChart = new window.Chart(ctx, {
     type: 'pie',
     data: {
