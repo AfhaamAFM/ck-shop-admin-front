@@ -339,7 +339,7 @@ dispatch(fetchProduct())
                                         return <option id={value._id} key={i}>{value.name}</option>;
                                     })}
                             </Form.Select>
-                            <Button onClick={productShowHandler} variant='danger'> edit this Product </Button>
+                            <Button onClick={productShowHandler} disabled={!thisProduct} variant='danger'> edit this Product </Button>
                         </Form.Group>
                     </Row>
 
